@@ -1,0 +1,26 @@
+{
+  "name": "pet-friend-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devolve-wtf/PetFriendFinder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devolve-wtf/PetFriendFinder/issues"
+  },
+  "homepage": "https://github.com/devolve-wtf/PetFriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.13.2",
+    "sequelize-cli": "^3.0.0"
+  }
+}
