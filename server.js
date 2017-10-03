@@ -25,6 +25,7 @@ app.set('view engine', '.hbs');
 
 require('./routes/auth.js')(app, passport);
 require('./routes/api-routes.js')(app);
+require('./routes/html-routes.js')(app);
 
 require('./config/passport/passport.js')(passport, models.Owners);
 
