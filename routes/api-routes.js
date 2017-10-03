@@ -37,6 +37,8 @@ module.exports = function(app) {
     app.post('/api/owners', function(req, res) {
         db.Owners.create({
             name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
             picture: req.body.picture,
             location: req.body.location,
             gender: req.body.gender,
