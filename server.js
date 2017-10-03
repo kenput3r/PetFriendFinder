@@ -8,8 +8,6 @@ const models = require('./models');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-//const db = require('./models');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -26,8 +24,7 @@ app.engine('hbs', exphbs({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 require('./routes/auth.js')(app, passport);
-//require('./routes/api-routes.js')(app);
-//require('./routes/html-routes.js')(app);
+require('./routes/api-routes.js')(app);
 
 require('./config/passport/passport.js')(passport, models.Owners);
 
