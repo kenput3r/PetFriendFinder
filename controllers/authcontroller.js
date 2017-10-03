@@ -6,7 +6,11 @@ module.exports = {
         res.render('signin');
     },
     dashboard: function(req, res) {
-        res.render('dashboard');
+        res.render('dashboard', { 
+            ownername: req.user.name,
+            owneremail: req.user.email,
+            ownerid: req.user.id
+        });
     },
     logout: function(req, res) {
         req.session.destroy(function(err) {
