@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         picture: {
-            type: '',
+            type: DataTypes.STRING,
             allowNull: false,
         },
         location: {

@@ -3,16 +3,18 @@ const db = require('../models');
 module.exports = function(app) {
 
     //Get all pets
-    app.get('/api/pets', function(req,res) {
-        db.Pets.findAll({}).then(function(dbPets) {
-            res.json(dbPets);
+    app.get('/api/pets', function(req, res) {
+        db.Pets.findAll().then(function(data) {
+            res.json(data);
+            console.log(data);
         });
     });
 
     //Get all owners
     app.get('/api/owners', function(req, res) {
-        db.Owners.findAll({}).then(function(dbOwners) {
-            res.json(dbPets);
+        db.Owners.findAll().then(function(data) {
+            res.json(data);
+            console.log(data);
         });
     });
 
