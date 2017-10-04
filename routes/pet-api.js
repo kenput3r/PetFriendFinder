@@ -1,3 +1,6 @@
+const path = require('path');
+const models = require('../models');
+
 module.exports = function(app) {
 
     //Get all pets
@@ -27,11 +30,37 @@ module.exports = function(app) {
         });
     });
 
-    //Post new pet
-    app.post('api/pets', function(req, res) {
-        models.Pets.create(req.body).then(function(dbPets) {
-            res.json(dbPets);
+    //Post new pet with picture
+    app.post('/api/pets', function(req, res) {
+        let imgPath;
+        let ownerId = req.body.ownerId;
+
+        if(req.files.petPicture) {
+            let petPicture = req.files.petPicture;
+            imgPath = '/PetImages/' + ownerId + '_' + req.body.name + '.jpg';
+
+            petPicture.mv(path.join(__dirname, '../public' + imgPath), function(err) {
+                if(err) {
+                    return res.status(500).send(err);
+                }
+            });
+        }else{
+            imgPath = 'https://api.adorable.io/avatars/285/' + req.body.name + '.png'
+        }
+
+        models.Pets.create({
+            name: req.body.name,
+            ownerId: ownerId,
+            picture: imgPath,
+            type: req.body.type,
+            gender: req.body.gender,
+            breed: req.body.breed,
+            age: req.body.age,
+            bio: req.body.bio
+        }).then(function() {
+            res.redirect('/owners/' + ownerId);
         });
+
     });
 
     //Upload pet picture

@@ -10,4 +10,4 @@
 * Design & style DOM
 
 ***
-### Note - /OwnerImages needs to be manually added to /public as it is currently being ignored
+### Note - /OwnerImages & /PetImages need to be manually added to /public as they are currently being ignored

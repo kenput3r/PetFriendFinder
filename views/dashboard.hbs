@@ -4,7 +4,7 @@
     <p>Owner id: {{ownerid}}</p>
 
   <form ref='uploadForm' 
-  id='uploadForm' 
+  id='OwnerPictureUploadForm' 
   action='http://localhost:8080/api/upload' 
   method='post' 
   encType="multipart/form-data">
@@ -13,3 +13,19 @@
       <input type="hidden" name="name" value="{{ownername}}" />
       <input type='submit' value='Upload!' id="upload"/>
   </form> 
+
+    <form ref='uploadForm' 
+    id='AddPet' 
+    action='http://localhost:8080/api/pets' 
+    method='post' 
+    encType="multipart/form-data">
+      <input type="file" name="petPicture" />
+      <input type="text" name="name" />
+      <input type="text" name="type" />
+      <input type="text" name="breed" />
+      <input type="text" name="gender" />
+      <input type="text" name="age" />
+      <input type="text" name="bio" />
+      <input type="hidden" name="ownerId" value="{{ownerid}}" />
+      <input type='submit' value='Upload!' id="upload"/>
+    </form> 
