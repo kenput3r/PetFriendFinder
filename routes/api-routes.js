@@ -1,14 +1,11 @@
-const db = require('../models');
-const fileUpload = require('express-fileupload');
-const path = require("path");
+const models = require('../models');
+const path = require('path');
 
 module.exports = function(app) {
 
-    app.use(fileUpload());
-
     //Get all pets
     app.get('/api/pets', function(req, res) {
-        db.Pets.findAll().then(function(data) {
+        models.Pets.findAll().then(function(data) {
             res.json(data);
             console.log(data);
         });
@@ -16,7 +13,7 @@ module.exports = function(app) {
 
     //Get all owners
     app.get('/api/owners', function(req, res) {
-        db.Owners.findAll().then(function(data) {
+        models.Owners.findAll().then(function(data) {
             res.json(data);
             console.log(data);
         });
@@ -24,7 +21,7 @@ module.exports = function(app) {
 
     //Post New Pet
     app.post('/api/pets', function(req, res) {
-        db.Pets.create({
+        models.Pets.create({
             name: req.body.name,
             ownerId: req.body.ownerId,
             picture: req.body.picture,
@@ -39,7 +36,7 @@ module.exports = function(app) {
     });
 
     app.post('/api/owners', function(req, res) {
-        db.Owners.create({
+        models.Owners.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
@@ -65,16 +62,16 @@ module.exports = function(app) {
         // Use the mv() method to place the file somewhere on your server
         ownerPicture.mv(path.join(__dirname,"../public"+imgPath), function(err) {
             
-            if (err) {
+            if(err) {
                 return res.status(500).send(err);
             }
 
-            db.Owners.update(
+            models.Owners.update(
                 {
                     picture: imgPath
                 },
                 {
-                    where: { id: req.body.id}
+                    where: { id: ownerId }
                 }
             );
         
