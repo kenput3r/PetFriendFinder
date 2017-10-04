@@ -1,0 +1,20 @@
+.pet-masthead {
+  position: relative;
+  padding: 2rem 20px;
+}
+
+.pet-margin-b-sm {
+  margin-bottom: 1rem;
+}
+
+.pet-margin-b-md {
+  margin-bottom: 2rem;
+}
+
+.pet-text-white {
+  color: white !important;
+}
+
+.pet-text-firebrick {
+  color: #c92930;
+}
