@@ -2,3 +2,14 @@
     <h5>Hurray! you are logged in {{ownername}}!</h5>
     <p>Owner email address: {{owneremail}}</p>
     <p>Owner id: {{ownerid}}</p>
+
+  <form ref='uploadForm' 
+  id='uploadForm' 
+  action='http://localhost:8080/api/upload' 
+  method='post' 
+  encType="multipart/form-data">
+      <input type="file" name="ownerPicture" />
+      <input type="hidden" name="id" value="{{ownerid}}" />
+      <input type="hidden" name="name" value="{{ownername}}" />
+      <input type='submit' value='Upload!' id="upload"/>
+  </form> 
