@@ -19,22 +19,6 @@ module.exports = function(app) {
         });
     });
 
-    //Post New Pet
-    app.post('/api/pets', function(req, res) {
-        models.Pets.create({
-            name: req.body.name,
-            ownerId: req.body.ownerId,
-            picture: req.body.picture,
-            type: req.body.type,
-            breed: req.body.breed,
-            gender: req.body.gender,
-            age: req.body.age,
-            bio: req.body.bio
-        }).then(function(dbPets) {
-            res.json(dbPets);
-        });
-    });
-
     app.post('/api/owners', function(req, res) {
         models.Owners.create({
             name: req.body.name,
@@ -79,4 +63,6 @@ module.exports = function(app) {
         });
    
     });
+
+
 }
