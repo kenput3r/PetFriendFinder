@@ -31,7 +31,7 @@ module.exports = function(passport, owner) {
                         email: email,
                         password: ownerPassowrd,
                         name: req.body.name,
-                        picture: req.body.picture,
+                        picture: 'https://api.adorable.io/avatars/285/' + email + '.png',
                         location: req.body.location,
                         gender: req.body.gender,
                         age: req.body.age,
