@@ -53,26 +53,32 @@ module.exports = function(app) {
         });
     });
 
+    //Upload Owner picture
     app.post("/api/upload", function(req, res){
         
         if (!req.files)
         return res.status(400).send('No files were uploaded.');
-        let sampleFile = req.files.sampleFile;
-    
-        var imgPath = "/OwnerImages/"+req.body.id+"_"+req.body.name+".jpg";
-        // Use the mv() method to place the file somewhere on your server
-        console.log(imgPath);
-        sampleFile.mv(path.join(__dirname,"../public"+imgPath), function(err) {
-            if (err)
-                return res.status(500).send(err);
-
-            db.Owners.update({
-            picture: imgPath
-            },{
-            where: { id: req.body.id}
-            });
+        let ownerPicture = req.files.ownerPicture;
+        let ownerId = req.body.id;
+        let imgPath = "/OwnerImages/"+ownerId+"_"+req.body.name+".jpg";
         
-            res.send('File uploaded!');
+        // Use the mv() method to place the file somewhere on your server
+        ownerPicture.mv(path.join(__dirname,"../public"+imgPath), function(err) {
+            
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            db.Owners.update(
+                {
+                    picture: imgPath
+                },
+                {
+                    where: { id: req.body.id}
+                }
+            );
+        
+            res.redirect('/owners/' + ownerId);
         });
    
     });
