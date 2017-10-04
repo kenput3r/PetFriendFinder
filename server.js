@@ -33,7 +33,7 @@ require('./routes/api-routes.js')(app, fileUpload);
 require('./routes/pet-api.js')(app, fileUpload);
 require('./routes/html-routes.js')(app);
 
-models.sequelize.sync({ force: true }).then(() => {
+models.sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => {
         console.log('App listening on PORT ' + PORT);
     });
