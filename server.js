@@ -20,7 +20,7 @@ app.use(passport.session());
 app.use(express.static('public'));
 
 app.set('views', './views');
-app.engine('hbs', exphbs({ extname: '.hbs' }));
+app.engine('hbs', exphbs({ defaultLayout: "main", extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 require('./routes/auth.js')(app, passport);
