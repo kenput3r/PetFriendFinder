@@ -8,3 +8,6 @@
 * Create pets feed
 * Create filters for pets feed
 * Design & style DOM
+
+***
+### Note - /OwnerImages needs to be manually added to /public as it is currently being ignored
