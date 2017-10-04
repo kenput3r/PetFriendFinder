@@ -3,7 +3,7 @@
 
 ### To Do
 
-* Add image upload feature
+* ~~Add image upload feature~~
 * Create add pet form
 * Create pets feed
 * Create filters for pets feed
