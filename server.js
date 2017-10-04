@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
 const models = require('./models');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -19,17 +21,19 @@ app.use(passport.session());
 
 app.use(express.static('public'));
 
+app.use(fileUpload());
+
 app.set('views', './views');
 app.engine('hbs', exphbs({ defaultLayout: "main", extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
+require('./config/passport/passport.js')(passport, models.Owners);
 require('./routes/auth.js')(app, passport);
-require('./routes/api-routes.js')(app);
+require('./routes/api-routes.js')(app, fileUpload);
+require('./routes/pet-api.js')(app, fileUpload);
 require('./routes/html-routes.js')(app);
 
-require('./config/passport/passport.js')(passport, models.Owners);
-
-models.sequelize.sync({ force: false }).then(() => {
+models.sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => {
         console.log('App listening on PORT ' + PORT);
     });
