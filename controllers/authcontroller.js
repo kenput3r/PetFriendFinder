@@ -6,7 +6,7 @@ module.exports = {
         res.render('signin');
     },
     dashboard: function(req, res) {
-        res.render('dashboard', { 
+        res.render('dashboard', {
             ownername: req.user.name,
             owneremail: req.user.email,
             ownerid: req.user.id
@@ -18,6 +18,6 @@ module.exports = {
         });
     },
     home: function(req, res) {
-        res.render('home');
+        res.render('index');
     }
 }
