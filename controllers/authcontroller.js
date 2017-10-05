@@ -9,7 +9,8 @@ module.exports = {
         res.render('dashboard', {
             ownername: req.user.name,
             owneremail: req.user.email,
-            ownerid: req.user.id
+            ownerid: req.user.id,
+            isUser: req.isAuthenticated()
         });
     },
     logout: function(req, res) {

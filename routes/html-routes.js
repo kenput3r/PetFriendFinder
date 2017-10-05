@@ -1,4 +1,5 @@
 const models = require('../models');
+let loggedIn;
 
 module.exports = function(app) {
     //Get an owner by id
@@ -6,7 +7,8 @@ module.exports = function(app) {
         models.Owners.findOne( {where: {id: req.params.id}}).then(data => {
             res.render('owner', {
                 name: data.name,
-                picture: data.picture
+                picture: data.picture,
+                isUser: req.isAuthenticated()
             });
         });
     });
@@ -20,11 +22,25 @@ module.exports = function(app) {
                 Owners.push(data[owner]);
             }
 
+            console.log('loggedIn:', req.isAuthenticated());
+
             res.render('owners', {
-                owners: Owners
+                owners: Owners,
+                isUser: req.isAuthenticated()
             });
         });
     });
+
+    //Get a pet by id
+    app.get('/pets/:id', function(req, res) {
+        models.Pets.findOne( {where: {id: req.params.id}}).then(data => {
+            res.render('pet', {
+                name: data.name,
+                picture: data.picture,
+                isUser: req.isAuthenticated()
+            })
+        })
+    })
 
     //Get all pets
     app.get('/pets', function(req, res) {
@@ -36,7 +52,8 @@ module.exports = function(app) {
             }
 
             res.render('pets', {
-                pets: Pets
+                pets: Pets,
+                isUser: req.isAuthenticated()
             });
         });
     });
