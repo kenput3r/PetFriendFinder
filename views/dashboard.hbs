@@ -8,24 +8,26 @@
   action='http://localhost:8080/api/upload' 
   method='post' 
   encType="multipart/form-data">
+      <h3>Upload Owner's Photo</h3>
       <input type="file" name="ownerPicture" />
       <input type="hidden" name="id" value="{{ownerid}}" />
       <input type="hidden" name="name" value="{{ownername}}" />
-      <input type='submit' value='Upload!' id="upload"/>
+      <input type='submit' value='Upload!' id="owner-upload"/>
   </form> 
-
+  <br><br>
     <form ref='uploadForm' 
     id='AddPet' 
     action='http://localhost:8080/api/pets' 
     method='post' 
     encType="multipart/form-data">
-      <input type="file" name="petPicture" />
-      <input type="text" name="name" />
-      <input type="text" name="type" />
-      <input type="text" name="breed" />
-      <input type="text" name="gender" />
-      <input type="text" name="age" />
-      <input type="text" name="bio" />
+      <h3>Upload Pet's Photo</h3>
+      <input type="file" name="petPicture" placeholder="Pet Pic"/>
+      <input type="text" name="name" placeholder="name"/>
+      <input type="text" name="type" placeholder="type"/>
+      <input type="text" name="breed" placeholder="breed"/>
+      <input type="text" name="gender" placeholder="gender"/>
+      <input type="text" name="age" placeholder="age" />
+      <input type="text" name="bio" placeholder="bio"/>
       <input type="hidden" name="ownerId" value="{{ownerid}}" />
-      <input type='submit' value='Upload!' id="upload"/>
+      <input type='submit' value='Upload!' id="pet-upload"/>
     </form> 
