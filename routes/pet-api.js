@@ -26,7 +26,7 @@ module.exports = function(app) {
             },
             include: [models.Owners]
         }).then(function(dbPets) {
-            res.josn(dbPets);
+            res.json(dbPets);
         });
     });
 
