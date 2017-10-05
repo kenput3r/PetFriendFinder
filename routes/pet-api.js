@@ -12,7 +12,7 @@ module.exports = function(app) {
 
         models.Pets.findAll({
             where: query,
-            include: [models.Owner]
+            include: [models.Owners]
         }).then(function(dbPets) {
             res.json(dbPets);
         });
@@ -24,7 +24,7 @@ module.exports = function(app) {
             where: {
                 id: req.params.id
             },
-            include: [models.Owner]
+            include: [models.Owners]
         }).then(function(dbPets) {
             res.josn(dbPets);
         });
