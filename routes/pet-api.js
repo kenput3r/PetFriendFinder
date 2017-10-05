@@ -50,7 +50,7 @@ module.exports = function(app) {
 
         models.Pets.create({
             name: req.body.name,
-            ownerId: ownerId,
+            OwnerId: ownerId,
             picture: imgPath,
             type: req.body.type,
             gender: req.body.gender,
