@@ -15,13 +15,28 @@ module.exports = function(app) {
     app.get('/owners', function(req, res) {
         models.Owners.findAll({}).then(data => {
             let Owners = [];
-            
+
             for(owner in data) {
                 Owners.push(data[owner]);
             }
 
             res.render('owners', {
                 owners: Owners
+            });
+        });
+    });
+
+    //Get all pets
+    app.get('/pets', function(req, res) {
+        models.Pets.findAll({}).then(data => {
+            let Pets = [];
+
+            for(pet in data) {
+                Pets.push(data[pet]);
+            }
+
+            res.render('pets', {
+                pets: Pets
             });
         });
     });
