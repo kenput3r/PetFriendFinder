@@ -103,4 +103,13 @@ module.exports = function(app) {
             }
         );
     });
+
+    //Delete pet
+    app.delete('/api/pets/:id', function(req, res){
+        models.Pets.destroy({
+            where: {id: req.params.id}
+        }).then(function(dbPets){
+            res.json(dbPets);
+        });
+    });
 }

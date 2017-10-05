@@ -8,31 +8,18 @@ module.exports = function(app) {
     app.get('/api/owners', function(req, res) {
         models.Owners.findAll().then(function(data) {
             res.json(data);
-            // console.log(data);
         });
     });
 
     //Find a certain owner
     app.get('/api/owners/:id', function(req, res){
         models.Owners.findOne({
-            where: {id: req.params.id}
+            where: {id: req.params.id},
+            include: [models.Pets]
         }).then(function(ownerData){
             res.json(ownerData);
         });
     })
-
-
-    // //Find all pets of a certain owner
-    // app.get('api/owners/pets/:id', function(req, res){
-    //     console.log(req.params.id);
-    //     models.Owners.findAll({
-    //         where: {id: req.params.id},
-    //         include: [models.Pets]
-    //     }).then(function(ownerPets){
-    //         console.log(ownerPets);
-    //         res.json(ownerPets);
-    //     });
-    // })
 
     //Create new owner
     app.post('/api/owners', function(req, res) {
@@ -83,11 +70,12 @@ module.exports = function(app) {
     //Updating Owner's info
 
     //Deleting a certain owner
-
-    //Get a certain pet
-
-    //Update pet's info
-
-    //Delete a certain pet
+    app.delete('/api/owners/:id', function(req, res){
+        models.Owners.destroy({
+            where: {id: req.params.id}
+        }).then(function(dbOwners){
+            res.json(dbOwners);
+        })
+    });
 
 }
