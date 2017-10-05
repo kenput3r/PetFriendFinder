@@ -1,10 +1,11 @@
-const db = require('../models');
+const models = require('../models');
+const path = require('path');
 
 module.exports = function(app) {
 
     //Get all pets
     app.get('/api/pets', function(req, res) {
-        db.Pets.findAll().then(function(data) {
+        models.Pets.findAll().then(function(data) {
             res.json(data);
             console.log(data);
         });
@@ -12,30 +13,14 @@ module.exports = function(app) {
 
     //Get all owners
     app.get('/api/owners', function(req, res) {
-        db.Owners.findAll().then(function(data) {
+        models.Owners.findAll().then(function(data) {
             res.json(data);
             console.log(data);
         });
     });
 
-    //Post New Pet
-    app.post('/api/pets', function(req, res) {
-        db.Pets.create({
-            name: req.body.name,
-            ownerId: req.body.ownerId,
-            picture: req.body.picture,
-            type: req.body.type,
-            breed: req.body.breed,
-            gender: req.body.gender,
-            age: req.body.age,
-            bio: req.body.bio
-        }).then(function(dbPets) {
-            res.json(dbPets);
-        });
-    });
-
     app.post('/api/owners', function(req, res) {
-        db.Owners.create({
+        models.Owners.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
@@ -48,4 +33,36 @@ module.exports = function(app) {
             res.json(dbOwners);
         });
     });
+
+    //Upload Owner picture
+    app.post("/api/upload", function(req, res){
+        
+        if (!req.files)
+        return res.status(400).send('No files were uploaded.');
+        let ownerPicture = req.files.ownerPicture;
+        let ownerId = req.body.id;
+        let imgPath = "/OwnerImages/"+ownerId+"_"+req.body.name+".jpg";
+        
+        // Use the mv() method to place the file somewhere on your server
+        ownerPicture.mv(path.join(__dirname,"../public"+imgPath), function(err) {
+            
+            if(err) {
+                return res.status(500).send(err);
+            }
+
+            models.Owners.update(
+                {
+                    picture: imgPath
+                },
+                {
+                    where: { id: ownerId }
+                }
+            );
+        
+            res.redirect('/owners/' + ownerId);
+        });
+   
+    });
+
+
 }

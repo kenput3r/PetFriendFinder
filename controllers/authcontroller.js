@@ -3,7 +3,7 @@ module.exports = {
         res.render('signup');
     },
     signin: function(req, res) {
-        res.render('signin');
+        res.redirect('/dashboard');
     },
     dashboard: function(req, res) {
         res.render('dashboard', {

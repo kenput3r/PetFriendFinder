@@ -1,7 +1,6 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
   <div class="container">
-    <a class="navbar-brand">Pet Friend Finder</a>
-    {{ownerName}}
+    <a class="navbar-brand">Pet Friend Finder</a> {{ownerName}}
     <a href="/logout/">Logout</a>
   </div>
 </nav>
@@ -9,12 +8,29 @@
   <div class="row">
     <h2>Dashboard</h2>
     <div class="col-md-3">
+      <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
+        <input type="file" name="ownerPicture" />
+        <input type="hidden" name="id" value="{{ownerid}}" />
+        <input type="hidden" name="name" value="{{ownername}}" />
+        <input type='submit' value='Upload!' id="upload" />
+      </form>
 
+      <form ref='uploadForm' id='AddPet' action='http://localhost:8080/api/pets' method='post' encType="multipart/form-data">
+        <input type="file" name="petPicture" />
+        <input type="text" name="name" />
+        <input type="text" name="type" />
+        <input type="text" name="breed" />
+        <input type="text" name="gender" />
+        <input type="text" name="age" />
+        <input type="text" name="bio" />
+        <input type="hidden" name="ownerId" value="{{ownerid}}" />
+        <input type='submit' value='Upload!' id="upload" />
+      </form>
     </div>
     <div class="col-md-9">
-      <h5>{{ownerName}}</h5>
-      <p>{{ownerEmail}}</p>
-      <p>{{ownerBio}}</p>
+      <h5>Hurray! you are logged in {{ownername}}!</h5>
+      <p>Owner email address: {{owneremail}}</p>
+      <p>Owner id: {{ownerid}}</p>
     </div>
   </div>
 </div>
