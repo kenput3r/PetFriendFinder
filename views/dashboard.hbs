@@ -1,4 +1,20 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <div class="container">
+    <a class="navbar-brand">Pet Friend Finder</a>
+    {{ownerName}}
+    <a href="/logout/">Logout</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
     <h2>Dashboard</h2>
-    <h5>Hurray! you are logged in {{ownername}}!</h5>
-    <p>Owner email address: {{owneremail}}</p>
-    <p>Owner id: {{ownerid}}</p>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-9">
+      <h5>{{ownerName}}</h5>
+      <p>{{ownerEmail}}</p>
+      <p>{{ownerBio}}</p>
+    </div>
+  </div>
+</div>
