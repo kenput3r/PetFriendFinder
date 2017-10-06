@@ -32,6 +32,7 @@ require('./routes/auth.js')(app, passport);
 require('./routes/api-routes.js')(app, fileUpload);
 require('./routes/pet-api.js')(app, fileUpload);
 require('./routes/html-routes.js')(app);
+require('./routes/friendship-api.js')(app);
 
 models.sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => {

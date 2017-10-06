@@ -1,25 +1,24 @@
 module.exports = function(sequelize, DataTypes){
-    let Friendship = sequelize.define('Friendship',{
+    let Friendships = sequelize.define('Friendships',{
         myPetId: DataTypes.INTEGER,
         friendPetId: DataTypes.INTEGER
     });
 
-    Friendship.associate = function(models){
-        // Friendship.belongsTo(models.Pets,
-        //      {foreignKey: 'myPetId', targetKey: "id"},
-        //      {foreignKey: 'friendPetId', targetKey: "id"},
-        //     {onDelete: "cascade"});
+    Friendships.associate = function(models){
 
-            Friendship.belongsTo(models.Pets, {
+            Friendships.belongsTo(models.Pets, {
                 as: 'myPet',
                 foreignKey: 'myPetId'
             });
             
-            Friendship.belongsTo(models.Pets, {
+            Friendships.belongsTo(models.Pets, {
                 as: 'friendPet',
                 foreignKey: 'friendPetId'
+            },
+            {
+                onDelete: "cascade"
             });
         
     };
-    return Friendship;
+    return Friendships;
 }
