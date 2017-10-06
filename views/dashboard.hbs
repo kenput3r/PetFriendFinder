@@ -1,6 +1,9 @@
- <div class="container">
-     <div class="row">
-         <div class="col-md-6 offset-md-3">
+<div class="container">
+    <div class="row">
+        <div class="mx-auto">
+            <img class="card-img-top img-fluid" src="{{ownerpicture}}" alt="{{ownername}}">
+        </div>
+        <div class="col-md-6 offset-md-3">
             <h2>Dashboard</h2>
             <h5>Hurray! you are logged in {{ownername}}!</h5>
             <p>Owner email address: {{owneremail}}</p>
@@ -9,43 +12,35 @@
             <hr>
             <h2>Add A Profile Picture</h2>
 
-            <form ref='uploadForm' 
-            id='OwnerPictureUploadForm' 
-            action='http://localhost:8080/api/upload' 
-            method='post' 
-            encType="multipart/form-data">
+            <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
 
                 <div class="form-group">
                     <input type="hidden" name="id" value="{{ownerid}}" />
                     <input type="hidden" name="name" value="{{ownername}}" />
                     <input type="file" name="ownerPicture" />
-                    <input type='submit' value='Upload!' id="upload"/>
+                    <input type='submit' value='Upload!' id="upload" />
                 </div>
-            </form> 
+            </form>
 
             <hr>
 
             <h2>Add A Pet</h2>
-            <form ref='uploadForm' 
-            id='AddPet' 
-            action='http://localhost:8080/api/pets' 
-            method='post' 
-            encType="multipart/form-data">
+            <form ref='uploadForm' id='AddPet' action='http://localhost:8080/api/pets' method='post' encType="multipart/form-data">
 
                 <div class="form-group">
-                    <label for="petPicture" class="col-form-label">Picture</label>  
+                    <label for="petPicture" class="col-form-label">Picture</label>
                     <input class="form-control" type="file" name="petPicture" />
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-form-label">Name</label>      
+                    <label for="name" class="col-form-label">Name</label>
                     <input class="form-control" type="text" name="name" />
                 </div>
                 <div class="form-group">
-                    <label for="type" class="col-form-label">Pet Type</label>     
+                    <label for="type" class="col-form-label">Pet Type</label>
                     <input class="form-control" type="text" name="type" placeholder="Dog" />
                 </div>
                 <div class="form-group">
-                    <label for="breed" class="col-form-label">Breed</label>      
+                    <label for="breed" class="col-form-label">Breed</label>
                     <input class="form-control" type="text" name="breed" placeholder="Pug" />
                 </div>
                 <div class="form-group">
@@ -64,10 +59,13 @@
                     <label for="bio">Bio</label>
                     <input class="form-control" name="bio" type="text" />
                 </div>
-                    
+
                 <input type="hidden" name="ownerId" value="{{ownerid}}" />
-                <input type='submit' class="btn btn-primary" value='ADD' id="upload"/>
+                <input type='submit' class="btn btn-primary" value='ADD' id="upload" />
 
             </form>
+        </div>
+        <div class="col-md-6">
+            test
+        </div>
     </div>
-</div>

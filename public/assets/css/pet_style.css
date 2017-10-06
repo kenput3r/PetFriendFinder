@@ -1,3 +1,17 @@
+.navbar-nav {
+  flex-direction: row;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.nav-link {
+  margin-left: .5rem;
+  padding-right: .5rem !important;
+  padding-left: .5rem !important;
+}
+
 .pet-masthead {
   position: relative;
   padding: 2rem 20px;
