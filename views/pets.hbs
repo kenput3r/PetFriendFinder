@@ -1,3 +1,39 @@
+<!-- display filter and pets -->
+<div>
+<form method="post" name="filter" action="http://localhost:8080/pets/filter">
+
+    <select data-placeholder='Type' class='chosen-select' name="type" id='type'>
+        <option value=''></option>
+        <option value='dog'>Dog</option>
+        <option value='cat'>Cat</option>
+        <option value='bird'>Bird</option>
+    </select>
+
+
+    <select data-placeholder='Breed' class='chosen-select' name="breed" id='breed'>
+        <option value=''></option>
+        <option value='pug'>Pug</option>
+        <option value='chihuahua'>Chihuahua</option>
+    </select>
+
+    <select data-placeholder='age' class='chosen-select' name="age" id='age'>
+        <option value=''></option>
+        <option value='0-3'>less than 3 years</option>
+        <option value='4-7'>4-7 years</option>
+        <option value='8+'>8+</option>
+    </select>
+
+    <select data-placeholder='gender' class='chosen-select' name="gender" id='gender'>
+        <option value=''></option>
+        <option value='female'>Female</option>
+        <option value='male'>Male</option>
+    </select>
+
+    <input type="submit" value="Search" id="submit"/>
+
+</div>
+</form>
+
 <div>
     {{#each pets}}
 
@@ -6,7 +42,8 @@
         <div class="card-body">
             <h4 class="card-title">{{name}}</h4>
             <p class="card-text">{{bio}}</p>
-            <a href="pets/{{id}}" class="btn btn-primary">View Profile</a>
+            <!--  href changed from "pets/{{id}} to just {{id}}-->
+            <a href="{{id}}" class="btn btn-primary">View Profile</a>
         </div>
         </div>
 
