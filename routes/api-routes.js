@@ -22,6 +22,7 @@ module.exports = function(app) {
             age: req.body.age,
             bio: req.body.bio
         }).then(function(dbOwners) {
+            console.log("=================="+dbOwners);
             res.json(dbOwners);
         });
     });

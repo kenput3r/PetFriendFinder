@@ -103,4 +103,26 @@ module.exports = function(app) {
             }
         );
     });
+
+    ////test
+    
+
+    app.post('/pets/filter', function(req, res){
+        models.Pets.findAll({
+            where: {type: req.body.type}
+
+        }).then(function(data){
+            //push pet data to Pets
+            var Pets = [];
+            console.log(data);
+            for(pet in data) {
+                Pets.push(data[pet]);
+            }
+            res.render('pets', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            });
+        })
+    })
+
 }
