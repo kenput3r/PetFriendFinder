@@ -8,11 +8,19 @@ module.exports = function(app) {
             where: {id: req.params.id},
             include: [models.Pets]
         }).then(data => {
-            console.log(data.pets);
+            let canEdit = false;
+            if(req.isAuthenticated()) {
+                if((req.user.id * 1) === (req.params.id * 1)) {
+                    canEdit = true;
+                }
+            }
+            console.log(canEdit);
+            console.log(req.params.id, req.user.id);
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
                 pets: data.Pets,
+                canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });
         });
@@ -39,19 +47,28 @@ module.exports = function(app) {
     //Get a pet by id
     app.get('/pets/:id', function(req, res) {
         models.Pets.findOne( {where: {id: req.params.id}}).then(data => {
+            let canEdit = false;
+            if(req.isAuthenticated()) {
+                if((data.OwnerId * 1) === (req.user.id * 1)) {
+                    canEdit = true;
+                }
+                console.log(data.OwnerId, req.user.id);
+            }
+            
             res.render('pet', {
                 name: data.name,
                 picture: data.picture,
+                canEdit: canEdit,
                 isUser: req.isAuthenticated()
-            })
-        })
-    })
+            });
+        });
+    });
 
     //Get all pets
     app.get('/pets', function(req, res) {
         models.Pets.findAll({}).then(data => {
             let Pets = [];
-
+            
             for(pet in data) {
                 Pets.push(data[pet]);
             }

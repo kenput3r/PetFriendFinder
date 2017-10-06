@@ -1,3 +1,9 @@
 <h2>{{name}}</h2>
 
 <img src="{{picture}}" />
+
+{{#if canEdit}}
+    <p>I can edit this</p>
+{{else}}
+    <p>I can't edit this</p>
+{{/if}}
