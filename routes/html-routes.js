@@ -4,10 +4,15 @@ let loggedIn;
 module.exports = function(app) {
     //Get an owner by id
     app.get('/owners/:id', function(req, res) {
-        models.Owners.findOne( {where: {id: req.params.id}}).then(data => {
+        models.Owners.findOne( {
+            where: {id: req.params.id},
+            include: [models.Pets]
+        }).then(data => {
+            console.log(data.pets);
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
+                pets: data.Pets,
                 isUser: req.isAuthenticated()
             });
         });

@@ -3,14 +3,6 @@ const path = require('path');
 
 module.exports = function(app) {
 
-    //Get all pets
-    app.get('/api/pets', function(req, res) {
-        models.Pets.findAll().then(function(data) {
-            res.json(data);
-            console.log(data);
-        });
-    });
-
     //Get all owners
     app.get('/api/owners', function(req, res) {
         models.Owners.findAll().then(function(data) {
