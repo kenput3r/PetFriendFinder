@@ -1,22 +1,25 @@
 <div class="container">
+    <h2>Dashboard</h2>
     <div class="row">
-        <div class="mx-auto">
-            <img class="card-img-top img-fluid" src="{{ownerpicture}}" alt="{{ownername}}">
+        <div class="col-md-3">
+            <img class="mx-auto img-fluid" src="{{ownerPicture}}" alt="{{ownerName}}">
         </div>
-        <div class="col-md-6 offset-md-3">
-            <h2>Dashboard</h2>
-            <h5>Hurray! you are logged in {{ownername}}!</h5>
-            <p>Owner email address: {{owneremail}}</p>
-            <p>Owner id: {{ownerid}}</p>
-
-            <hr>
+        <div class="col-md-9">
+            <h1>{{ownerName}}!</h1>
+            <p>{{ownerEmail}}</p>
+            <p>Bio: {{ownerBio}}</p>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <h2>Add A Profile Picture</h2>
 
             <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
 
                 <div class="form-group">
-                    <input type="hidden" name="id" value="{{ownerid}}" />
-                    <input type="hidden" name="name" value="{{ownername}}" />
+                    <input type="hidden" name="id" value="{{ownerId}}" />
+                    <input type="hidden" name="name" value="{{ownerName}}" />
                     <input type="file" name="ownerPicture" />
                     <input type='submit' value='Upload!' id="upload" />
                 </div>
@@ -25,6 +28,7 @@
             <hr>
 
             <h2>Add A Pet</h2>
+
             <form ref='uploadForm' id='AddPet' action='http://localhost:8080/api/pets' method='post' encType="multipart/form-data">
 
                 <div class="form-group">
@@ -60,7 +64,7 @@
                     <input class="form-control" name="bio" type="text" />
                 </div>
 
-                <input type="hidden" name="ownerId" value="{{ownerid}}" />
+                <input type="hidden" name="ownerId" value="{{ownerId}}" />
                 <input type='submit' class="btn btn-primary" value='ADD' id="upload" />
 
             </form>
@@ -69,3 +73,4 @@
             test
         </div>
     </div>
+</div>
