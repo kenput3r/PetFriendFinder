@@ -3,7 +3,6 @@ const path = require('path');
 
 module.exports = function(app) {
 
-
     //Get all owners
     app.get('/api/owners', function(req, res) {
         models.Owners.findAll().then(function(data) {
@@ -40,7 +39,7 @@ module.exports = function(app) {
     //Upload Owner picture
     app.post("/api/upload", function(req, res){
         
-        if (!req.files)
+        if (!req.files.ownerPicture)
         return res.status(400).send('No files were uploaded.');
         let ownerPicture = req.files.ownerPicture;
         let ownerId = req.body.id;

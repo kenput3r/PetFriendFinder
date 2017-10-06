@@ -1,0 +1,14 @@
+<div>
+    {{#each pets}}
+
+        <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title">{{name}}</h4>
+            <p class="card-text">{{bio}}</p>
+            <a href="pets/{{id}}" class="btn btn-primary">View Profile</a>
+        </div>
+        </div>
+
+    {{/each}}
+</div>

@@ -43,11 +43,11 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     Pets.associate = function(models) {
-		Pets.belongsTo(models.Owners, {
-			foreignKey: {
-				allowNull: false
-			  }		
-		});
-	};
+        Pets.belongsTo(models.Owners, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
     return Pets;
 };
