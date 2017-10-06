@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="/assets/css/pet_style.css">
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <div class="container">
+        <a class="navbar-brand">Pet Friend Finder</a>
+        {{#if isUser}}
+            <a href="logout" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</a>
+        {{else}}
+          <form class="form-inline" id="signin" name="signin" method="post" action="signin">
+              <input class="form-control mr-sm-2" name="email" type="text" placeholder="Email"/>
+              <input class="form-control mr-sm-2" name="password" type="password" placeholder="Password"/>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
+          </form>
+        {{/if}}
+      </div>
+    </nav>
+
     {{{ body }}}
 
     <!-- Optional JavaScript -->
