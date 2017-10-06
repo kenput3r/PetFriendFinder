@@ -45,5 +45,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
         }
     });
+
+    Owners.associate = function(models) {
+        Owners.hasMany(models.Pets, {
+            onDelete: 'cascade'
+        });
+    };
     return Owners;
 };

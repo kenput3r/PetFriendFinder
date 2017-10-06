@@ -1,3 +1,8 @@
     <h2>{{name}}</h2>
 
     <img src="{{picture}}" />
+
+    {{#each pets}}
+        <p>{{name}}</p>
+        <img src="{{picture}}" />
+    {{/each}}
