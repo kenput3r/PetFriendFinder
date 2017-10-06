@@ -1,24 +1,25 @@
 module.exports = {
-    signup: function(req, res) {
+    signup: function (req, res) {
         res.render('signup');
     },
-    signin: function(req, res) {
+    signin: function (req, res) {
         res.redirect('/dashboard');
     },
-    dashboard: function(req, res) {
+    dashboard: function (req, res) {
         res.render('dashboard', {
+            ownerpicture: req.user.picture,
             ownername: req.user.name,
             owneremail: req.user.email,
             ownerid: req.user.id,
             isUser: req.isAuthenticated()
         });
     },
-    logout: function(req, res) {
-        req.session.destroy(function(err) {
+    logout: function (req, res) {
+        req.session.destroy(function (err) {
             res.redirect('/');
         });
     },
-    home: function(req, res) {
+    home: function (req, res) {
         res.render('index');
     }
 }
