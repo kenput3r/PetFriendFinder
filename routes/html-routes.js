@@ -126,8 +126,8 @@ module.exports = function(app) {
 
         models.Pets.findAll({
             where: {type: req.body.type,
-                    breed: req.body.breed,
-                    age: req.body.age,
+                    //breed: req.body.breed,
+                    //age: req.body.age,
                     gender: req.body.gender}
         }).then(data => {
 
