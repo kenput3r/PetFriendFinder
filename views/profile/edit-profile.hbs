@@ -11,12 +11,12 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
+                <form ref='uploadForm' id='OwnerPictureUploadForm' action='/api/upload' method='post' encType="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" name="id" value="{{ownerid}}" />
                         <input type="hidden" name="name" value="{{ownername}}" />
                         <input type="file" name="ownerPicture" />
-                        <input type='submit' value='Upload!' id="upload" />
+                        <button type="submit" class="btn btn-success" id="upload">Upload!</button>
                     </div>
                 </form>
 

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            {{> homeSidenav}}
+        </div>
+        <div class="col-8">
+            <div class="mb-3">
+                <h2>Find a Pet Friend</h2>
+                <form method="post" name="filter" class="form-inline" action="http://localhost:8080/pets/filter">
+                    <div class="row mx-auto">
+                        <div class="col">
+                            <select data-placeholder='Type' class='form-control' name="type" id='type'>
+                                <option value=''>Type</option>
+                                <option value='dog'>Dog</option>
+                                <option value='cat'>Cat</option>
+                                <option value='bird'>Bird</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select data-placeholder='Breed' class='form-control' name="breed" id='breed'>
+                            <option value=''>Breed</option>
+                            <option value='pug'>Pug</option>
+                            <option value='chihuahua'>Chihuahua</option>
+                        </select>
+                        </div>
+                        <div class="col">
+                            <select data-placeholder='age' class='form-control' name="age" id='age'>
+                            <option value=''>Age</option>
+                            <option value='0-3'>less than 3 years</option>
+                            <option value='4-7'>4-7 years</option>
+                            <option value='8+'>8+</option>
+                        </select>
+                        </div>
+                        <div class="col">
+                            <select data-placeholder='gender' class='form-control' name="gender" id='gender'>
+                            <option value=''>Gender</option>
+                            <option value='female'>Female</option>
+                            <option value='male'>Male</option>
+                        </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+
+            {{#each pets}}
+
+            <div class="card float-right" style="width: 20rem;">
+                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text">{{bio}}</p>
+                    <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+
+            {{/each}}
+        </div>
+        <div class="col-2 text-center">
+            ads
+        </div>
+    </div>
+</div>
