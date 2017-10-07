@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {{> profileSidebar}}
+        </div>
+        <div class="col-md-9">
+            {{> profileNav}}
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-left" style="display: inline-block">Edit Profile</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="{{ownerid}}" />
+                        <input type="hidden" name="name" value="{{ownername}}" />
+                        <input type="file" name="ownerPicture" />
+                        <input type='submit' value='Upload!' id="upload" />
+                    </div>
+                </form>
+
+                <form id="edit-profile" name="edit-profile" method="post" action="/profile/edit-profile">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ownerName}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ownerEmail}}">
+                    </div>
+                    <div class=" form-group">
+                        <label for="password" class="col-form-label">Password</label>
+                        <input class="form-control" name="password" type="password" placeholder="Password" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="location" class="col-form-label">Location</label>
+                            <input type="text" class="form-control" name="location" placeholder="City" value="{{ownerLocation}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="gender" class="col-form-label">Gender</label>
+                            <select name="gender" class="form-control">
+                                <option name="gender" selected>Select One</option>
+                                <option name="gender" value="male" >Male</option>
+                                <option name="gender" value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="age" class="col-form-label">Age</label>
+                            <input class="form-control" name="age" type="text" value="{{ownerAge}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea class="form-control" name="bio" type="text" rows="3">{{ownerBio}}</textarea>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

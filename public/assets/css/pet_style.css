@@ -6,7 +6,11 @@ button:hover {
   cursor: pointer;
 }
 
-.nav-link {
+.rounded {
+  border-radius: 1.25rem!important;
+}
+
+.navBar-link {
   margin-left: .5rem;
   padding-right: .5rem !important;
   padding-left: .5rem !important;
@@ -23,6 +27,10 @@ button:hover {
 
 .pet-margin-b-md {
   margin-bottom: 2rem;
+}
+
+.pet-margin-l-sm {
+  margin-left: 1rem;
 }
 
 .pet-text-white {
