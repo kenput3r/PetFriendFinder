@@ -14,8 +14,6 @@ module.exports = function(app) {
                     canEdit = true;
                 }
             }
-            console.log(canEdit);
-            console.log(req.params.id, req.user.id);
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
@@ -35,8 +33,6 @@ module.exports = function(app) {
                 Owners.push(data[owner]);
             }
 
-            console.log('loggedIn:', req.isAuthenticated());
-
             res.render('owners', {
                 owners: Owners,
                 isUser: req.isAuthenticated()
@@ -52,7 +48,6 @@ module.exports = function(app) {
                 if((data.OwnerId * 1) === (req.user.id * 1)) {
                     canEdit = true;
                 }
-                console.log(data.OwnerId, req.user.id);
             }
             
             res.render('pet', {
