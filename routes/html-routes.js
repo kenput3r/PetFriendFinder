@@ -140,4 +140,19 @@ module.exports = function (app) {
             });
         });
     });
+
+    //Get owner's friends (no data)
+    app.get('/home', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('home', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
 }
