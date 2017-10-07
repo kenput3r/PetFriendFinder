@@ -11,11 +11,19 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.json({
+    type: 'application/vnd.api+json'
+}));
 
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -24,7 +32,15 @@ app.use(express.static('public'));
 app.use(fileUpload());
 
 app.set('views', './views');
-app.engine('hbs', exphbs({ defaultLayout: "main", extname: '.hbs' }));
+
+app.engine('hbs', exphbs(
+    { 
+        defaultLayout: "main", 
+        extname: '.hbs',
+        partialsDir: 'views/partials'
+    }
+));
+
 app.set('view engine', '.hbs');
 
 require('./config/passport/passport.js')(passport, models.Owners);
@@ -34,7 +50,9 @@ require('./routes/pet-api.js')(app, fileUpload);
 require('./routes/html-routes.js')(app);
 require('./routes/friendship-api.js')(app);
 
-models.sequelize.sync({ force: false }).then(() => {
+models.sequelize.sync({
+    force: false
+}).then(() => {
     app.listen(PORT, () => {
         console.log('App listening on PORT ' + PORT);
     });
