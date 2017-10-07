@@ -32,13 +32,15 @@ app.use(express.static('public'));
 app.use(fileUpload());
 
 app.set('views', './views');
-app.engine('hbs', exphbs({
-    defaultLayout: "main",
-    extname: '.hbs',
-    partialsDir: [
-        __dirname + '/views/partials',
-    ]
-}));
+
+app.engine('hbs', exphbs(
+    { 
+        defaultLayout: "main", 
+        extname: '.hbs',
+        partialsDir: 'views/partials'
+    }
+));
+
 app.set('view engine', '.hbs');
 
 require('./config/passport/passport.js')(passport, models.Owners);

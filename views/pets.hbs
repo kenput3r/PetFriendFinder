@@ -1,14 +1,23 @@
-<div>
-    {{#each pets}}
+<main class="container">
+    <div class="row">
+        <section class="col-md-6 col-sm-12">
+            {{#each pets}}
+                
+                <div class="card float-right" style="width: 20rem;">
+                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text">{{bio}}</p>
+                    <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
+                </div>
+                </div>
 
-        <div class="card" style="width: 20rem;">
-        <img class="card-img-top" src="{{picture}}" alt="Card image cap">
-        <div class="card-body">
-            <h4 class="card-title">{{name}}</h4>
-            <p class="card-text">{{bio}}</p>
-            <a href="pets/{{id}}" class="btn btn-primary">View Profile</a>
-        </div>
-        </div>
+            {{/each}}
+        </section>
 
-    {{/each}}
-</div>
+        <aside class="col-md-6 col-sm-12">
+            <p>sidebar</p>
+            {{> aside }}
+        </aside>
+    </div>
+</main>
