@@ -82,14 +82,14 @@ module.exports = function (app) {
     });
 
     //Get owner's pet to view-my-pets
-    app.get('/dashboard/view-my-pets', function (req, res) {
+    app.get('/dashboard/view-pets', function (req, res) {
         models.Owners.findOne({
             where: {
                 id: req.user.id
             },
             include: [models.Pets]
         }).then(data => {
-            res.render('dashboard/view-my-pets', {
+            res.render('dashboard/view-pets', {
                 ownerPicture: data.picture,
                 ownerName: data.name,
                 ownerEmail: data.email,

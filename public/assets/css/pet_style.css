@@ -29,6 +29,10 @@ button:hover {
   margin-bottom: 2rem;
 }
 
+.pet-margin-l-sm {
+  margin-left: 1rem;
+}
+
 .pet-text-white {
   color: white !important;
 }

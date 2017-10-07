@@ -1,28 +1,29 @@
 <div class="container">
-    <h2>Dashboard</h2>
     <div class="row">
         <div class="col-md-3">
             {{> userSidebar}}
         </div>
         <div class="col-md-9">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/view-my-pets">Pets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/view-friends">Friends</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/edit-profile">Edit Profile</a>
-                </li>
-            </ul>
-            <h2>My Pets</h2>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-pet">Add a Pet</button>
+            {{> nav}}
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-left" style="display: inline-block">My Pets</h2>
+                    <button type="button" class="btn btn-primary pet-margin-b-sm pet-margin-l-sm" data-toggle="modal" data-target="#add-pet">Add a Pet</button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="card-deck">
+                    {{#each pets}}
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{name}}</h4>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
         </div>
-        <hr>
     </div>
 </div>
 <!-- Modal -->
