@@ -61,6 +61,7 @@ module.exports = function (app) {
                 where: {
                     id: ownerId
                 }
+
             });
 
             res.redirect('/profile/edit-profile');
