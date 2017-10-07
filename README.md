@@ -8,10 +8,14 @@
 * Create pets feed
 * Create filters for pets feed
 * Design & style DOM
-* Create Search Pet from (search by ??) 
+* ~~Create Search Pet from (search by ??)~~ 
 * Creat Owner Search form (search by ??)
-* Create questionare for pets match
-* Add logic for matching pets
+* ~~Add logic for matching pets~~
+
+* Remove extra gets
+* Update owners info
+* Update pet's info
+* Create form validation so that users HAVE to select a type
 
 
 ***
