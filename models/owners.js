@@ -48,8 +48,8 @@ module.exports = function(sequelize, DataTypes) {
 
     Owners.associate = function(models) {
         Owners.hasMany(models.Pets, {
-            onDelete: 'cascade'
+          onDelete: "cascade"
         });
-    };
+      };
     return Owners;
 };
