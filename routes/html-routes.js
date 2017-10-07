@@ -95,9 +95,47 @@ module.exports = function (app) {
                 ownerEmail: data.email,
                 ownerId: data.id,
                 ownerBio: data.bio,
-                name: data.name,
-                picture: data.picture,
                 pets: data.Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Get owner's info
+    app.get('/dashboard/edit-profile', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('dashboard/edit-profile', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                ownerEmail: data.email,
+                ownerAge: data.age,
+                ownerLocation: data.location,
+                ownerId: data.id,
+                ownerBio: data.bio,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Get owner's friends (no data)
+    app.get('/dashboard/view-friends', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('dashboard/view-friends', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                ownerEmail: data.email,
+                ownerAge: data.age,
+                ownerLocation: data.location,
+                ownerId: data.id,
+                ownerBio: data.bio,
                 isUser: req.isAuthenticated()
             });
         });

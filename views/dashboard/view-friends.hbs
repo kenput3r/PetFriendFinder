@@ -1,36 +1,18 @@
 <div class="container">
-    <h2>Dashboard</h2>
     <div class="row">
         <div class="col-md-3">
             {{> userSidebar}}
         </div>
         <div class="col-md-9">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/view-my-pets">Pets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/view-friends">Friends</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/edit-profile">Edit Profile</a>
-                </li>
-            </ul>
-            <h2>Add A Profile Picture</h2>
-
-            <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
-
-                <div class="form-group">
-                    <input type="hidden" name="id" value="{{ownerId}}" />
-                    <input type="hidden" name="name" value="{{ownerName}}" />
-                    <input type="file" name="ownerPicture" />
-                    <input type='submit' value='Upload!' id="upload" />
+            {{> nav}}
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-left" style="display: inline-block">Friends list</h2>
                 </div>
-            </form>
+            </div>
+            <div class="row justify-content-center">
+                No friends
+            </div>
         </div>
-        <hr>
     </div>
 </div>
