@@ -20,7 +20,7 @@
       <a href="/home" class="navbar-brand">Pet Friend Finder</a>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-info navBar-link" href="/profile/" role="button">My Profile</a>
+          <a class="nav-link btn btn-outline-info navBar-link" href="/profile" role="button">My Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn btn-outline-info navBar-link" href="/logout" role="button">Logout</a>
@@ -47,6 +47,33 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
+
+  <script>
+    switch (window.location.pathname) {
+      case '/profile':
+        $('#view-post').addClass('active');
+        break;
+      case '/profile/view-pets':
+        $('#view-pets').addClass('active');
+        break;
+      case '/profile/view-friends':
+        $('#view-friends').addClass('active');
+        break;
+      case '/profile/edit-profile':
+        $('#edit-profile').addClass('active');
+        break;
+      case '/home':
+        $('#feed').addClass('active');
+        break;
+      case '/find-pet-friend':
+        $('#find-pet-friend').addClass('active');
+        break;
+      case '/message':
+        $('#message').addClass('active');
+        break;
+    }
+  </script>
+
 </body>
 
 </html>

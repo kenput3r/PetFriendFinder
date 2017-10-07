@@ -50,9 +50,9 @@ module.exports = function (app) {
             }
         }).then(data => {
             let canEdit = false;
-            let petOwnerId = 0 ;
-            if(req.isAuthenticated()) {
-                if((data.OwnerId * 1) === (req.user.id * 1)) {
+            let petOwnerId = 0;
+            if (req.isAuthenticated()) {
+                if ((data.OwnerId * 1) === (req.user.id * 1)) {
                     ///Prepare owner Id to be sent
                     petOwnerId = req.user.id * 1;
                     canEdit = true;
@@ -62,7 +62,7 @@ module.exports = function (app) {
             res.render('pet', {
                 name: data.name,
                 picture: data.picture,
-                petOwnerId: petOwnerId,/////sending the owner Id
+                petOwnerId: petOwnerId, /////sending the owner Id
                 canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });
@@ -92,6 +92,7 @@ module.exports = function (app) {
     
         var age = 0;
         if(req.body.age === '0-3') {
+          
             age = {
                 lte: 4
             }
@@ -119,6 +120,7 @@ module.exports = function (app) {
     
         if(req.body.gender != '') {
             query.gender = req.body.gender
+
         }
     
         models.Pets.findAll({
@@ -211,5 +213,21 @@ module.exports = function (app) {
             });
         });
 
+    });
+
+    //Get all pets
+    app.get('/find-pet-friend', function (req, res) {
+        models.Pets.findAll({}).then(data => {
+            let Pets = [];
+
+            for (pet in data) {
+                Pets.push(data[pet]);
+            }
+
+            res.render('find-pet-friend', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
     });
 }
