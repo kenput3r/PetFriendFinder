@@ -2,29 +2,23 @@
     <h2>Dashboard</h2>
     <div class="row">
         <div class="col-md-3">
-            {{> userInfo}}
+            {{> userSidebar}}
         </div>
         <div class="col-md-9">
-            {{> nav}}
-        </div>
-        <hr>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Add A Profile Picture</h2>
-
-            <form ref='uploadForm' id='OwnerPictureUploadForm' action='http://localhost:8080/api/upload' method='post' encType="multipart/form-data">
-
-                <div class="form-group">
-                    <input type="hidden" name="id" value="{{ownerId}}" />
-                    <input type="hidden" name="name" value="{{ownerName}}" />
-                    <input type="file" name="ownerPicture" />
-                    <input type='submit' value='Upload!' id="upload" />
-                </div>
-            </form>
-
-            <hr>
-
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/view-my-pets">Pets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/view-friends">Friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/edit-profile">Edit Profile</a>
+                </li>
+            </ul>
             <h2>Add A Pet</h2>
 
             <form ref='uploadForm' id='AddPet' action='http://localhost:8080/api/pets' method='post' encType="multipart/form-data">
@@ -67,8 +61,6 @@
 
             </form>
         </div>
-        <div class="col-md-6">
-            test
-        </div>
+        <hr>
     </div>
 </div>
