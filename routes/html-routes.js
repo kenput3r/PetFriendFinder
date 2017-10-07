@@ -235,6 +235,8 @@ module.exports = function (app) {
             });
         });
 
+    });
+
     //Get owner's pet to view-my-pets
     app.get('/profile/view-pets', function (req, res) {
         models.Owners.findOne({
