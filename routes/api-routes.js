@@ -7,10 +7,20 @@ module.exports = function(app) {
     app.get('/api/owners', function(req, res) {
         models.Owners.findAll().then(function(data) {
             res.json(data);
-            console.log(data);
         });
     });
 
+    //Find a certain owner
+    app.get('/api/owners/:id', function(req, res){
+        models.Owners.findOne({
+            where: {id: req.params.id},
+            include: [models.Pets]
+        }).then(function(ownerData){
+            res.json(ownerData);
+        });
+    })
+
+    //Create new owner
     app.post('/api/owners', function(req, res) {
         models.Owners.create({
             name: req.body.name,
@@ -22,6 +32,7 @@ module.exports = function(app) {
             age: req.body.age,
             bio: req.body.bio
         }).then(function(dbOwners) {
+            console.log("=================="+dbOwners);
             res.json(dbOwners);
         });
     });
@@ -55,6 +66,16 @@ module.exports = function(app) {
         });
    
     });
+ 
+    //Updating Owner's info
 
+    //Deleting a certain owner
+    app.delete('/api/owners/:id', function(req, res){
+        models.Owners.destroy({
+            where: {id: req.params.id}
+        }).then(function(dbOwners){
+            res.json(dbOwners);
+        })
+    });
 
 }

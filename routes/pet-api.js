@@ -26,7 +26,7 @@ module.exports = function(app) {
             },
             include: [models.Owners]
         }).then(function(dbPets) {
-            res.josn(dbPets);
+            res.json(dbPets);
         });
     });
 
@@ -102,5 +102,14 @@ module.exports = function(app) {
             res.json(dbPets);
             }
         );
+    });
+
+    //Delete pet
+    app.delete('/api/pets/:id', function(req, res){
+        models.Pets.destroy({
+            where: {id: req.params.id}
+        }).then(function(dbPets){
+            res.json(dbPets);
+        });
     });
 }
