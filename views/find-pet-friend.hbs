@@ -5,8 +5,8 @@
         </div>
         <div class="col-8">
             <div class="mb-3">
-                <h2>Find a Pet Friend</h2>
-                <form method="post" name="filter" class="form-inline" action="http://localhost:8080/pets/filter">
+                <h2 class="mb-3">Find a Pet Friend</h2>
+                <form method="post" name="filter" class="form-inline mb-4" action="http://localhost:8080/pets/filter">
                     <div class="row mx-auto">
                         <div class="col">
                             <select data-placeholder='Type' class='form-control' name="type" id='type'>
@@ -42,19 +42,20 @@
                     </div>
                 </form>
             </div>
-
-            {{#each pets}}
-
-            <div class="card float-right" style="width: 20rem;">
-                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">{{name}}</h4>
-                    <p class="card-text">{{bio}}</p>
-                    <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
+            <div class="row text-center">
+                {{#each pets}}
+                <div class="col">
+                    <div class="card mx-auto" style="width: 20rem;">
+                        <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title">{{name}}</h4>
+                            <p class="card-text">{{bio}}</p>
+                            <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
                 </div>
+                {{/each}}
             </div>
-
-            {{/each}}
         </div>
         <div class="col-2 text-center">
             ads
