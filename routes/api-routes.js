@@ -3,22 +3,22 @@ const path = require('path');
 
 module.exports = function(app) {
 
-    //Get all owners
-    app.get('/api/owners', function(req, res) {
-        models.Owners.findAll().then(function(data) {
-            res.json(data);
-        });
-    });
+    // //Get all owners
+    // app.get('/api/owners', function(req, res) {
+    //     models.Owners.findAll().then(function(data) {
+    //         res.json(data);
+    //     });
+    // });
 
-    //Find a certain owner
-    app.get('/api/owners/:id', function(req, res){
-        models.Owners.findOne({
-            where: {id: req.params.id},
-            include: [models.Pets]
-        }).then(function(ownerData){
-            res.json(ownerData);
-        });
-    })
+    // //Find a certain owner
+    // app.get('/api/owners/:id', function(req, res){
+    //     models.Owners.findOne({
+    //         where: {id: req.params.id},
+    //         include: [models.Pets]
+    //     }).then(function(ownerData){
+    //         res.json(ownerData);
+    //     });
+    // })
 
     //Create new owner
     app.post('/api/owners', function(req, res) {

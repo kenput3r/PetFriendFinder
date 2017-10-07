@@ -42,32 +42,6 @@ module.exports = function (app) {
         });
     });
 
-    //Get a pet by id
-    app.get('/pets/:id', function (req, res) {
-        models.Pets.findOne({
-            where: {
-                id: req.params.id
-            }
-        }).then(data => {
-            let canEdit = false;
-            let petOwnerId = 0 ;
-            if(req.isAuthenticated()) {
-                if((data.OwnerId * 1) === (req.user.id * 1)) {
-                    ///Prepare owner Id to be sent
-                    petOwnerId = req.user.id * 1;
-                    canEdit = true;
-                }
-            }
-
-            res.render('pet', {
-                name: data.name,
-                picture: data.picture,
-                petOwnerId: petOwnerId,/////sending the owner Id
-                canEdit: canEdit,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
 
     //Get all pets
     app.get('/pets', function (req, res) {
@@ -85,6 +59,36 @@ module.exports = function (app) {
         });
     });
 
+
+    //Get a pet by id
+    app.get('/pets/?:id', function (req, res) {
+        models.Pets.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(data => {
+            let canEdit = false;
+            let petOwnerId = 0 ;
+            if(req.isAuthenticated()) {
+                if((data.OwnerId * 1) === (req.user.id * 1)) {
+                    ///Prepare owner Id to be sent
+                    petOwnerId = req.user.id * 1;
+                    canEdit = true;
+                }
+            }
+
+            res.render('pet', {
+                id: req.params.id,
+                name: data.name,
+                picture: data.picture,
+                petOwnerId: petOwnerId,/////sending the owner Id
+                canEdit: canEdit,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Filtering pets for pets match
     app.post('/pets/filter', function(req, res) {
         console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
 
@@ -102,8 +106,6 @@ module.exports = function (app) {
                 gte: 8
             }
         };
-
-        //create form validation so that users HAVE to select a type
 
         if(req.body.type != "") {
             models.Pets.findAll({
@@ -130,6 +132,7 @@ module.exports = function (app) {
             console.log("Type is not selected");
         }
     });
+
     //Get owner's pet to view-my-pets
     app.get('/profile/view-pets', function (req, res) {
         models.Owners.findOne({
@@ -204,5 +207,29 @@ module.exports = function (app) {
             });
         });
 
+    });
+
+    //Get the current owner pets to choose from for the friendship
+    app.post('/myPets', function(req, res){
+        console.log(req.body.friendPetId);
+        var friendPetId = req.body.friendPetId * 1;
+        models.Pets.findAll({
+            where: {
+                OwnerId: req.user.id * 1
+            },
+        }).then(data => {
+           
+            let Pets = [];
+            
+                for (pet in data) {
+                    Pets.push(data[pet]);
+                }
+    
+                res.render('pet', {
+                    friendPetId: friendPetId,
+                    mypets: Pets,
+                    isUser: req.isAuthenticated()
+                });
+        });
     });
 }
