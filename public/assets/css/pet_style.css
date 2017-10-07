@@ -6,6 +6,10 @@ button:hover {
   cursor: pointer;
 }
 
+.rounded {
+  border-radius: 1.25rem!important;
+}
+
 .nav-link {
   margin-left: .5rem;
   padding-right: .5rem !important;
