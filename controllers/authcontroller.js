@@ -3,10 +3,10 @@ module.exports = {
         res.render('signup');
     },
     signin: function (req, res) {
-        res.redirect('/dashboard');
+        res.redirect('/profile');
     },
-    dashboard: function (req, res) {
-        res.render('dashboard', {
+    profile: function (req, res) {
+        res.render('profile', {
             ownerPicture: req.user.picture,
             ownerName: req.user.name,
             ownerEmail: req.user.email,

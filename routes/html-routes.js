@@ -82,14 +82,14 @@ module.exports = function (app) {
     });
 
     //Get owner's pet to view-my-pets
-    app.get('/dashboard/view-pets', function (req, res) {
+    app.get('/profile/view-pets', function (req, res) {
         models.Owners.findOne({
             where: {
                 id: req.user.id
             },
             include: [models.Pets]
         }).then(data => {
-            res.render('dashboard/view-pets', {
+            res.render('profile/view-pets', {
                 ownerPicture: data.picture,
                 ownerName: data.name,
                 ownerEmail: data.email,
@@ -102,13 +102,13 @@ module.exports = function (app) {
     });
 
     //Get owner's info
-    app.get('/dashboard/edit-profile', function (req, res) {
+    app.get('/profile/edit-profile', function (req, res) {
         models.Owners.findOne({
             where: {
                 id: req.user.id
             }
         }).then(data => {
-            res.render('dashboard/edit-profile', {
+            res.render('profile/edit-profile', {
                 ownerPicture: data.picture,
                 ownerName: data.name,
                 ownerEmail: data.email,
@@ -122,13 +122,13 @@ module.exports = function (app) {
     });
 
     //Get owner's friends (no data)
-    app.get('/dashboard/view-friends', function (req, res) {
+    app.get('/profile/view-friends', function (req, res) {
         models.Owners.findOne({
             where: {
                 id: req.user.id
             }
         }).then(data => {
-            res.render('dashboard/view-friends', {
+            res.render('profile/view-friends', {
                 ownerPicture: data.picture,
                 ownerName: data.name,
                 ownerEmail: data.email,

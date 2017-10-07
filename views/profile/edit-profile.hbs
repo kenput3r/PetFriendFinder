@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            {{> dashboardSidebar}}
+            {{> profileSidebar}}
         </div>
         <div class="col-md-9">
-            {{> dashboardNav}}
+            {{> profileNav}}
             <div class="row">
                 <div class="col">
                     <h2 class="text-left" style="display: inline-block">Edit Profile</h2>
@@ -20,7 +20,7 @@
                     </div>
                 </form>
 
-                <form id="edit-profile" name="edit-profile" method="post" action="/dashboard/edit-profile">
+                <form id="edit-profile" name="edit-profile" method="post" action="/profile/edit-profile">
                     <div class="form-group">
                         <label for="name" class="col-form-label">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name" value="{{ownerName}}">
