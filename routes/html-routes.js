@@ -85,51 +85,60 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/pets/filter', function (req, res) {
-        console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
-
+    app.post('/pets/filter', function(req, res) {
+        console.log('\n======\n' + req.body.type + '\n======\n' + req.body.breed + '\n======\n' + req.body.age + '\n======\n' + req.body.gender);
+    
+        let query = {};
+    
         var age = 0;
-        if (req.body.age === "0-3") {
+        if(req.body.age === '0-3') {
+          
             age = {
-                lt: 3
+                lte: 4
             }
-        } else if (req.body.age === "4-7") {
+        } else if (req.body.age === '4-7') {
             age = {
                 between: [4, 7]
             }
         } else {
             age = {
-                gte: 8
+                gt: 7
             }
         };
-
-        //create form validation so that users HAVE to select a type
-
-        if (req.body.type != "") {
-            models.Pets.findAll({
-                where: {
-                    type: req.body.type
-                    // breed: req.body.breed,
-                    // age: req.body.age,
-                    // gender: req.body.gender
-                }
-            }).then(data => {
-
-                let Pets = [];
-                //push pet data to Pets
-                for (pet in data) {
-                    Pets.push(data[pet]);
-                }
-
-                res.render('pets', {
-                    pets: Pets,
-                    isUser: req.isAuthenticated()
-                });
-            });
-        } else {
-            console.log("Type is not selected");
+    
+        if(req.body.type != '') {
+            query.type = req.body.type
         }
+    
+        if(req.body.breed != '') {
+            query.breed = req.body.breed
+        }
+    
+        if(req.body.age != '') {
+            query.age = req.body.age
+        }
+    
+        if(req.body.gender != '') {
+            query.gender = req.body.gender
+
+        }
+    
+        models.Pets.findAll({
+            where: query
+        }).then(data => {
+            let Pets = [];
+    
+            for(pet in data) {
+                Pets.push(data[pet]);
+            }
+    
+            res.render('pets', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            })
+        })
     });
+
     //Get owner's pet to view-my-pets
     app.get('/profile/view-pets', function (req, res) {
         models.Owners.findOne({
@@ -220,24 +229,5 @@ module.exports = function (app) {
                 isUser: req.isAuthenticated()
             });
         });
-    });
-
-    app.post('/pets/filter', function (req, res) {
-        console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
-
-        var age = 0;
-        if (req.body.age === "0-3") {
-            age = {
-                lt: 3
-            }
-        } else if (req.body.age === "4-7") {
-            age = {
-                between: [4, 7]
-            }
-        } else {
-            age = {
-                gte: 8
-            }
-        };
     });
 }
