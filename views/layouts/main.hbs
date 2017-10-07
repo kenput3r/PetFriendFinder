@@ -47,6 +47,27 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
+
+  <script>
+    switch (window.location.pathname) {
+      case '/profile':
+        $('#view-post').addClass('active');
+        break;
+      case '/profile/view-pets':
+        $('#view-pets').addClass('active');
+        break;
+      case '/profile/view-album':
+        $('#view-album').addClass('active');
+        break;
+      case '/profile/view-friends':
+        $('#view-friends').addClass('active');
+        break;
+      case '/profile/edit-profile':
+        $('#edit-profile').addClass('active');
+        break;
+    }
+  </script>
+
 </body>
 
 </html>
