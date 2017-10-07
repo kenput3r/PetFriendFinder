@@ -1,46 +1,51 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      test
-    </div>
-    <div class="col-md-8">
-  <form id="signup" name="signup" method="post" action="/signup">
-    <div class="form-group">
-      <label for="email" class="col-form-label">Email</label>
-      <input type="email" class="form-control" name="email" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="name" class="col-form-label">Name</label>
-      <input type="text" class="form-control" name="name" placeholder="Name">
-    </div>
-    <div class="form-group">
-      <label for="password" class="col-form-label">Password</label>
-      <input class="form-control" name="password" type="password" placeholder="Password"/>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="location" class="col-form-label">Location</label>
-        <input type="text" class="form-control" name="location" placeholder="City">
+<main class="pet-masthead">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <img class="img-fluid" src="/assets/img/pets.jpg" alt="pets">
       </div>
-      <div class="form-group col-md-4">
-        <label for="gender" class="col-form-label">Gender</label>
-        <select name="gender" class="form-control">
+      <div class="col-md-7">
+        <h1 class="mb-3">Create a New Account</h1>
+        <form id="signup" name="signup" method="post" action="/signup">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="name" class="col-form-label">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">Password</label>
+            <input class="form-control" name="password" type="password" placeholder="Password" />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="location" class="col-form-label">Location</label>
+              <input type="text" class="form-control" name="location" placeholder="City">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="gender" class="col-form-label">Gender</label>
+              <select name="gender" class="form-control">
           <option name="gender" selected>Select One</option>
           <option name="gender" value="male" >Male</option>
           <option name="gender" value="female">Female</option>
         </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="age" class="col-form-label">Age</label>
-        <input class="form-control" name="age" type="text" />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="age" class="col-form-label">Age</label>
+              <input class="form-control" name="age" type="text" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea class="form-control" name="bio" type="text" rows="3">{{ownerBio}}</textarea>
+          </div>
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="form-row">
-      <label for="bio">Bio</label>
-      <input class="form-control" name="bio" type="text" />
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
-</div>
-</div>
-</div>
+  </div>
+</main>
