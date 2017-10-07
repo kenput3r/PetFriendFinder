@@ -1,18 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-2">
-            <nav class="nav flex-column">
-                <span class="text-center mb-3">
-                    <img class="rounded mx-auto img-fluid" src="{{this.ownerPicture}}" alt="{{this.ownerName}}">
-                    {{ownerName}}
-                </span>
-                <div class="nav flex-column nav-pills">
-                    <a class="nav-link active" href="#v-pills-home">Feed</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile">Find a Pet Friend</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages">Album</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages">Messages</a>
-                </div>
-            </nav>
+            {{> homeSidenav}}
         </div>
         <div class="col-8">
             <div class="mb-3">

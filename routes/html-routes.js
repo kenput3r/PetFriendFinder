@@ -50,9 +50,9 @@ module.exports = function (app) {
             }
         }).then(data => {
             let canEdit = false;
-            let petOwnerId = 0 ;
-            if(req.isAuthenticated()) {
-                if((data.OwnerId * 1) === (req.user.id * 1)) {
+            let petOwnerId = 0;
+            if (req.isAuthenticated()) {
+                if ((data.OwnerId * 1) === (req.user.id * 1)) {
                     ///Prepare owner Id to be sent
                     petOwnerId = req.user.id * 1;
                     canEdit = true;
@@ -62,7 +62,7 @@ module.exports = function (app) {
             res.render('pet', {
                 name: data.name,
                 picture: data.picture,
-                petOwnerId: petOwnerId,/////sending the owner Id
+                petOwnerId: petOwnerId, /////sending the owner Id
                 canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });
@@ -85,11 +85,11 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/pets/filter', function(req, res) {
+    app.post('/pets/filter', function (req, res) {
         console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
 
         var age = 0;
-        if(req.body.age === "0-3") {
+        if (req.body.age === "0-3") {
             age = {
                 lt: 3
             }
@@ -105,18 +105,19 @@ module.exports = function (app) {
 
         //create form validation so that users HAVE to select a type
 
-        if(req.body.type != "") {
+        if (req.body.type != "") {
             models.Pets.findAll({
-                where: {type: req.body.type
-                        // breed: req.body.breed,
-                        // age: req.body.age,
-                        // gender: req.body.gender
-                    }
+                where: {
+                    type: req.body.type
+                    // breed: req.body.breed,
+                    // age: req.body.age,
+                    // gender: req.body.gender
+                }
             }).then(data => {
-    
+
                 let Pets = [];
                 //push pet data to Pets
-                for(pet in data) {
+                for (pet in data) {
                     Pets.push(data[pet]);
                 }
 
@@ -125,8 +126,7 @@ module.exports = function (app) {
                     isUser: req.isAuthenticated()
                 });
             });
-        }
-        else{
+        } else {
             console.log("Type is not selected");
         }
     });
@@ -204,5 +204,40 @@ module.exports = function (app) {
             });
         });
 
+    });
+
+    //Get all pets
+    app.get('/find-pet-friend', function (req, res) {
+        models.Pets.findAll({}).then(data => {
+            let Pets = [];
+
+            for (pet in data) {
+                Pets.push(data[pet]);
+            }
+
+            res.render('find-pet-friend', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    app.post('/pets/filter', function (req, res) {
+        console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
+
+        var age = 0;
+        if (req.body.age === "0-3") {
+            age = {
+                lt: 3
+            }
+        } else if (req.body.age === "4-7") {
+            age = {
+                between: [4, 7]
+            }
+        } else {
+            age = {
+                gte: 8
+            }
+        };
     });
 }
