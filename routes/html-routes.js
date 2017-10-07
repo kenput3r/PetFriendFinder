@@ -61,20 +61,18 @@ module.exports = function (app) {
 
 
     //Get a pet by id
-<<<<<<< HEAD
-    app.get('/pets/?:id', function (req, res) {
-=======
+
     app.get('/pets/:id', function (req, res) {
->>>>>>> f6cfe270092aa17a64e3a3ed6ea1ae8e2bcd3d48
+
         models.Pets.findOne({
             where: {
                 id: req.params.id
             }
         }).then(data => {
             let canEdit = false;
-            let petOwnerId = 0 ;
-            if(req.isAuthenticated()) {
-                if((data.OwnerId * 1) === (req.user.id * 1)) {
+            let petOwnerId = 0;
+            if (req.isAuthenticated()) {
+                if ((data.OwnerId * 1) === (req.user.id * 1)) {
                     ///Prepare owner Id to be sent
                     petOwnerId = req.user.id * 1;
                     canEdit = true;
@@ -85,16 +83,14 @@ module.exports = function (app) {
                 id: req.params.id,
                 name: data.name,
                 picture: data.picture,
-                petOwnerId: petOwnerId,/////sending the owner Id
+                petOwnerId: petOwnerId, /////sending the owner Id
                 canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });
         });
     });
 
-<<<<<<< HEAD
-    //Filtering pets for pets match
-=======
+
     //Get all pets
     app.get('/pets', function (req, res) {
         models.Pets.findAll({}).then(data => {
@@ -111,50 +107,60 @@ module.exports = function (app) {
         });
     });
 
->>>>>>> f6cfe270092aa17a64e3a3ed6ea1ae8e2bcd3d48
     app.post('/pets/filter', function(req, res) {
-        console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
-
+        console.log('\n======\n' + req.body.type + '\n======\n' + req.body.breed + '\n======\n' + req.body.age + '\n======\n' + req.body.gender);
+    
+        let query = {};
+    
         var age = 0;
-        if(req.body.age === "0-3") {
+        if(req.body.age === '0-3') {
+          
             age = {
-                lt: 3
+                lte: 4
             }
-        } else if (req.body.age === "4-7") {
+        } else if (req.body.age === '4-7') {
             age = {
                 between: [4, 7]
             }
         } else {
             age = {
-                gte: 8
+                gt: 7
             }
         };
 
-        if(req.body.type != "") {
-            models.Pets.findAll({
-                where: {type: req.body.type
-                        // breed: req.body.breed,
-                        // age: req.body.age,
-                        // gender: req.body.gender
-                    }
-            }).then(data => {
+        if(req.body.type != '') {
+            query.type = req.body.type
+        }
     
-                let Pets = [];
-                //push pet data to Pets
-                for(pet in data) {
-                    Pets.push(data[pet]);
-                }
+        if(req.body.breed != '') {
+            query.breed = req.body.breed
+        }
+    
+        if(req.body.age != '') {
+            query.age = req.body.age
+        }
+    
+        if(req.body.gender != '') {
+            query.gender = req.body.gender
 
-                res.render('pets', {
-                    pets: Pets,
-                    isUser: req.isAuthenticated()
-                });
-            });
         }
-        else{
-            console.log("Type is not selected");
-        }
+    
+        models.Pets.findAll({
+            where: query
+        }).then(data => {
+            let Pets = [];
+    
+            for(pet in data) {
+                Pets.push(data[pet]);
+            }
+    
+            res.render('pets', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            })
+        })
     });
+
     //Get owner's pet to view-my-pets
     app.get('/profile/view-pets', function (req, res) {
         models.Owners.findOne({
@@ -326,6 +332,22 @@ module.exports = function (app) {
                     mypets: Pets,
                     isUser: req.isAuthenticated()
                 });
+        });
+    });
+
+    //Get all pets
+    app.get('/find-pet-friend', function (req, res) {
+        models.Pets.findAll({}).then(data => {
+            let Pets = [];
+
+            for (pet in data) {
+                Pets.push(data[pet]);
+            }
+
+            res.render('find-pet-friend', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            });
         });
     });
 }

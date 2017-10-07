@@ -1,10 +1,27 @@
-#Badges div img {
-    margin-bottom: 20px;
-    max-width: 150px;
+#Badges div {
+    margin-bottom: 40px;
+    max-width: 200px;
+    position: relative;
+}
+#Badges h6 {
+    font-size: 0.75rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#Badges img {
+    display: block;
+    max-width: 70%;
+    margin: 0 auto;
 }
 
 .card {
     margin: 0 0 10px 0;
+}
+
+.card-header {
+    padding: .5rem .75rem;
 }
 
 .navbar {
