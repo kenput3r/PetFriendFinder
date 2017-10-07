@@ -62,7 +62,7 @@ module.exports = function(app) {
                 }
             );
         
-            res.redirect('/owners/' + ownerId);
+            res.redirect('/profile/edit-profile');
         });
    
     });
