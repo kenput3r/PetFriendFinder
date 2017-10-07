@@ -61,7 +61,11 @@ module.exports = function (app) {
 
 
     //Get a pet by id
+<<<<<<< HEAD
     app.get('/pets/?:id', function (req, res) {
+=======
+    app.get('/pets/:id', function (req, res) {
+>>>>>>> f6cfe270092aa17a64e3a3ed6ea1ae8e2bcd3d48
         models.Pets.findOne({
             where: {
                 id: req.params.id
@@ -88,7 +92,26 @@ module.exports = function (app) {
         });
     });
 
+<<<<<<< HEAD
     //Filtering pets for pets match
+=======
+    //Get all pets
+    app.get('/pets', function (req, res) {
+        models.Pets.findAll({}).then(data => {
+            let Pets = [];
+
+            for (pet in data) {
+                Pets.push(data[pet]);
+            }
+
+            res.render('pets', {
+                pets: Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+>>>>>>> f6cfe270092aa17a64e3a3ed6ea1ae8e2bcd3d48
     app.post('/pets/filter', function(req, res) {
         console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
 
@@ -132,6 +155,79 @@ module.exports = function (app) {
             console.log("Type is not selected");
         }
     });
+    //Get owner's pet to view-my-pets
+    app.get('/profile/view-pets', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            },
+            include: [models.Pets]
+        }).then(data => {
+            res.render('profile/view-pets', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                ownerEmail: data.email,
+                ownerId: data.id,
+                ownerBio: data.bio,
+                pets: data.Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Get owner's info
+    app.get('/profile/edit-profile', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('profile/edit-profile', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                ownerEmail: data.email,
+                ownerAge: data.age,
+                ownerLocation: data.location,
+                ownerId: data.id,
+                ownerBio: data.bio,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Get owner's friends (no data)
+    app.get('/profile/view-friends', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('profile/view-friends', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                ownerEmail: data.email,
+                ownerAge: data.age,
+                ownerLocation: data.location,
+                ownerId: data.id,
+                ownerBio: data.bio,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
+
+    //Get owner's friends (no data)
+    app.get('/home', function (req, res) {
+        models.Owners.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(data => {
+            res.render('home', {
+                ownerPicture: data.picture,
+                ownerName: data.name,
+                isUser: req.isAuthenticated()
+            });
+        });
 
     //Get owner's pet to view-my-pets
     app.get('/profile/view-pets', function (req, res) {
