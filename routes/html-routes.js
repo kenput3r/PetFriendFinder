@@ -17,7 +17,8 @@ module.exports = function (app) {
                 location: data.location,
                 email: data.email,
                 pets: data.Pets,
-                bio: data.bio
+                bio: data.bio,
+                isUser: req.isAuthenticated()
             });
         });
     });
@@ -64,7 +65,8 @@ module.exports = function (app) {
                     ownerName: ownerData.name,
                     ownerAge: ownerData.age,
                     ownerPicture: ownerData.picture,
-                    ownerId: ownerData.id
+                    ownerId: ownerData.id,
+                    isUser: req.isAuthenticated()
                 });
             });
         });
