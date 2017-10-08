@@ -127,23 +127,19 @@ module.exports = function (app) {
     
         if(req.body.age != '') {
             query.age = req.body.age
-        }
 
-        if(req.body.age === '0-3') {
-            query.age = {
-                lte: 3
-            }
-        }
-        
-        if (req.body.age === '4-7') {
-            query.age = {
-                between: [4, 7]
-            }
-        } 
-        
-        if (req.body.age === '8+') {
-            query.age = {
-                gte: 8
+            if(req.body.age === '0-3') {
+                query.age = {
+                    lte: 3
+                }
+            } else if(req.body.age === '4-7') {
+                query.age = {
+                    between: [4, 7]
+                }
+            } else {
+                query.age = {
+                    gte: 8
+                }
             }
         }
     
@@ -230,18 +226,21 @@ module.exports = function (app) {
 
     //Get owner's friends (no data)
     app.get('/home', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('home', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                isUser: req.isAuthenticated()
+        if(req.isAuthenticated()) {
+            models.Owners.findOne({
+                where: {
+                    id: req.user.id
+                }
+            }).then(data => {
+                res.render('home', {
+                    ownerPicture: data.picture,
+                    ownerName: data.name,
+                    isUser: req.isAuthenticated()
+                });
             });
-        });
-
+        } else {
+            res.redirect('/');
+        }
     });
 
     //Get owner's pet to view-my-pets
