@@ -16,12 +16,24 @@
     margin: 0 auto;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn.disabled:hover {
+    cursor: default;
+}
+
 .card {
     margin: 0 0 10px 0;
 }
 
 .card-header {
     padding: .5rem .75rem;
+}
+
+#Filters {
+    margin-bottom: 20px;
 }
 
 .navbar {
