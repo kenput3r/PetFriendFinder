@@ -39,3 +39,7 @@
 .navbar {
     margin-bottom: 20px;
 }
+
+.nav-link:hover {
+    cursor: pointer;
+}

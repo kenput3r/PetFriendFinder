@@ -10,36 +10,61 @@
             <div class="col-md-9">
                 <ul class="nav nav-tabs pet-margin-b-sm">
                     <li class="nav-item">
-                        <a id="view-post" class="nav-link" href="/profile">Posts</a>
+                        <a id="view-pets" class="nav-link section-change active" data-section="#Pets">Pets</a>
                     </li>
+
                     <li class="nav-item">
-                        <a id="view-pets" class="nav-link" href="/profile/view-pets">Pets</a>
+                        <a id="view-post" class="nav-link section-change" data-section="#Posts">Posts</a>
                     </li>
+
                     <li class="nav-item">
-                        <a id="view-friends" class="nav-link" href="/profile/view-friends">Friends</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="edit-profile" class="nav-link" href="/profile/edit-profile">Edit Profile</a>
+                        <a id="view-friends" class="nav-link section-change" data-section="#Friends">Friends</a>
                     </li>
                 </ul>
-                <div class="row">
-                    <div class="col">
-                        <h2 class="text-left" style="display: inline-block">My Pets</h2>
-                        <button type="button" class="btn btn-primary pet-margin-b-sm pet-margin-l-sm" data-toggle="modal" data-target="#add-pet">Add a Pet</button>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="card-deck">
-                        {{#each pets}}
-                        <div class="card">
-                            <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
-                            <div class="card-body">
-                                <h4 class="card-title text-center">{{name}}</h4>
-                            </div>
+
+                <section id="Pets">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Pets</h2>
                         </div>
-                        {{/each}}
                     </div>
-                </div>
+                    <div class="row justify-content-center">
+                        <div class="card-deck">
+                            {{#each pets}}
+                            <div class="card">
+                                <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">{{name}}</h4>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </section>
+
+                <section id="Posts" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Posts</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">Coming Soon</div>
+                    </div>
+                </section>
+
+                <section id="Friends" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Friends</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">Coming Soon</div>
+                    </div>
+                </section>
+
+
             </div>
         </div>
     </div>
