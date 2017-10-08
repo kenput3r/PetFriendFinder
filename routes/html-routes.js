@@ -46,7 +46,6 @@ module.exports = function (app) {
     });
 
     //Get a pet by id
-
     app.get('/pets/:id', function (req, res) {
 
         models.Pets.findOne({
@@ -148,13 +147,27 @@ module.exports = function (app) {
             where: query
         }).then(data => {
             let Pets = [];
-    
-            for(pet in data) {
+            let Types = [];
+            let Breeds = [];
+
+            for (pet in data) {
                 Pets.push(data[pet]);
+
+                if(!Types.includes(data[pet].type)) {
+                    Types.push(data[pet].type);
+                }
+
+                if(!Breeds.includes(data[pet].breed)) {
+                    if(data[pet].breed !== '') {
+                        Breeds.push(data[pet].breed);
+                    }
+                }
             }
     
             res.render('pets', {
                 pets: Pets,
+                types: Types,
+                breeds: Breeds,
                 isUser: req.isAuthenticated()
             })
         })
