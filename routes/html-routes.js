@@ -120,7 +120,7 @@ module.exports = function (app) {
             query.age = {
                 gte: 8
             }
-        };
+        }
     
         if(req.body.gender != '') {
             query.gender = req.body.gender
