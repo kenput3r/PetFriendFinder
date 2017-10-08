@@ -110,7 +110,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/pets/filter', function(req, res) {
+    app.post('/pets', function(req, res) {
         console.log('\n======\n' + req.body.type + '\n======\n' + req.body.breed + '\n======\n' + req.body.age + '\n======\n' + req.body.gender);
     
         let query = {};
