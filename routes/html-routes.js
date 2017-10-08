@@ -45,24 +45,6 @@ module.exports = function (app) {
         });
     });
 
-
-    // //Get all pets
-    // app.get('/pets', function (req, res) {
-    //     models.Pets.findAll({}).then(data => {
-    //         let Pets = [];
-
-    //         for (pet in data) {
-    //             Pets.push(data[pet]);
-    //         }
-
-    //         res.render('pets', {
-    //             pets: Pets,
-    //             isUser: req.isAuthenticated()
-    //         });
-    //     });
-    // });
-
-
     //Get a pet by id
 
     app.get('/pets/:id', function (req, res) {
