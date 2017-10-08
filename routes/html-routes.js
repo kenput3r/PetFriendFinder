@@ -94,7 +94,7 @@ module.exports = function (app) {
         if(req.body.age === '0-3') {
           
             age = {
-                lte: 4
+                lte: 3
             }
         } else if (req.body.age === '4-7') {
             age = {
@@ -102,7 +102,7 @@ module.exports = function (app) {
             }
         } else {
             age = {
-                gt: 7
+                gte: 8
             }
         };
     
