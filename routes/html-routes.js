@@ -46,21 +46,21 @@ module.exports = function (app) {
     });
 
 
-    //Get all pets
-    app.get('/pets', function (req, res) {
-        models.Pets.findAll({}).then(data => {
-            let Pets = [];
+    // //Get all pets
+    // app.get('/pets', function (req, res) {
+    //     models.Pets.findAll({}).then(data => {
+    //         let Pets = [];
 
-            for (pet in data) {
-                Pets.push(data[pet]);
-            }
+    //         for (pet in data) {
+    //             Pets.push(data[pet]);
+    //         }
 
-            res.render('pets', {
-                pets: Pets,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
+    //         res.render('pets', {
+    //             pets: Pets,
+    //             isUser: req.isAuthenticated()
+    //         });
+    //     });
+    // });
 
 
     //Get a pet by id
@@ -98,13 +98,27 @@ module.exports = function (app) {
     app.get('/pets', function (req, res) {
         models.Pets.findAll({}).then(data => {
             let Pets = [];
+            let Types = [];
+            let Breeds = [];
 
             for (pet in data) {
                 Pets.push(data[pet]);
+
+                if(!Types.includes(data[pet].type)) {
+                    Types.push(data[pet].type);
+                }
+
+                if(!Breeds.includes(data[pet].breed)) {
+                    if(data[pet].breed !== '') {
+                        Breeds.push(data[pet].breed);
+                    }
+                }
             }
 
             res.render('pets', {
                 pets: Pets,
+                types: Types,
+                breeds: Breeds,
                 isUser: req.isAuthenticated()
             });
         });

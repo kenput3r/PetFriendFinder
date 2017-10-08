@@ -8,23 +8,26 @@
             <div class="col">
                 <select data-placeholder='Type' class='chosen-select form-control' name="type" id='type'>
                     <option selected="selected">Pet Type</option>
-                    <option value='dog'>Dog</option>
-                    <option value='cat'>Cat</option>
+                    {{#each types}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
                 </select>
             </div>
 
             <div class="col">
                 <select data-placeholder='Breed' class='chosen-select form-control' name="breed" id='breed'>
                     <option value="" selected="selected">Breed</option>
-                    <option value='pug'>Pug</option>
-                    <option value='chihuahua'>Chihuahua</option>
-                    <option value="bengal">Bengal</option>
+                    <option value="">No Preference</option>
+                    {{#each breeds}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
                 </select>
             </div>
 
             <div class="col">
                 <select data-placeholder='Age' class='chosen-select form-control' name="age" id='age'>
                     <option value="" selected="selected">Age</option>
+                    <option value="">No Preference</option>
                     <option value='0-3'> &le; 3 years </option>
                     <option value='4-7'> 4-7 years </option>
                     <option value='8+'> &ge; 8 years </option>
@@ -34,6 +37,7 @@
             <div class="col">
                 <select data-placeholder='Gender' class='chosen-select form-control' name="gender" id='gender'>
                     <option value="" selected="Gender">Gender</option>
+                    <option value="">No Preference</option>
                     <option value='female'>Female</option>
                     <option value='male'>Male</option>
                 </select>
@@ -65,5 +69,12 @@
         <aside class="col-md-6 col-sm-12">
             {{> aside }}
         </aside>
+    </div>
+
+    <div class="row">
+        <p>types</p>
+        {{#each types}}
+            <p>{{this}}</p>
+        {{/each}}
     </div>
 </main>
