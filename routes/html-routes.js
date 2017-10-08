@@ -10,20 +10,14 @@ module.exports = function (app) {
             },
             include: [models.Pets]
         }).then(data => {
-            let canEdit = false;
-            if (req.isAuthenticated()) {
-                if ((req.user.id * 1) === (req.params.id * 1)) {
-                    canEdit = true;
-                }
-            }
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
                 age: data.age,
                 location: data.location,
+                email: data.email,
                 pets: data.Pets,
                 bio: data.bio,
-                canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });
         });
@@ -45,50 +39,35 @@ module.exports = function (app) {
         });
     });
 
-
-    //Get all pets
-    app.get('/pets', function (req, res) {
-        models.Pets.findAll({}).then(data => {
-            let Pets = [];
-
-            for (pet in data) {
-                Pets.push(data[pet]);
-            }
-
-            res.render('pets', {
-                pets: Pets,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-
-    //Get a pet by id
-
     app.get('/pets/:id', function (req, res) {
-
+        
         models.Pets.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            incldue: [models.Owners]
         }).then(data => {
-            let canEdit = false;
-            let petOwnerId = 0;
-            if (req.isAuthenticated()) {
-                if ((data.OwnerId * 1) === (req.user.id * 1)) {
-                    ///Prepare owner Id to be sent
-                    petOwnerId = req.user.id * 1;
-                    canEdit = true;
+            models.Owners.findOne({
+                where: {
+                    id: data.OwnerId
                 }
-            }
-
-            res.render('pet', {
-                id: req.params.id,
-                name: data.name,
-                picture: data.picture,
-                petOwnerId: petOwnerId, /////sending the owner Id
-                canEdit: canEdit,
-                isUser: req.isAuthenticated()
+            }).then(ownerData => {
+                console.log(ownerData.name);
+                res.render('pet', {
+                    id: req.params.id,
+                    name: data.name,
+                    picture: data.picture,
+                    age: data.age,
+                    type: data.type,
+                    breed: data.breed,
+                    bio: data.bio,
+                    location: ownerData.location,
+                    ownerName: ownerData.name,
+                    ownerAge: ownerData.age,
+                    ownerPicture: ownerData.picture,
+                    ownerId: ownerData.id,
+                    isUser: req.isAuthenticated()
+                });
             });
         });
     });
@@ -98,19 +77,33 @@ module.exports = function (app) {
     app.get('/pets', function (req, res) {
         models.Pets.findAll({}).then(data => {
             let Pets = [];
+            let Types = [];
+            let Breeds = [];
 
             for (pet in data) {
                 Pets.push(data[pet]);
+
+                if(!Types.includes(data[pet].type)) {
+                    Types.push(data[pet].type);
+                }
+
+                if(!Breeds.includes(data[pet].breed)) {
+                    if(data[pet].breed !== '') {
+                        Breeds.push(data[pet].breed);
+                    }
+                }
             }
 
             res.render('pets', {
                 pets: Pets,
+                types: Types,
+                breeds: Breeds,
                 isUser: req.isAuthenticated()
             });
         });
     });
 
-    app.post('/pets/filter', function(req, res) {
+    app.post('/pets', function(req, res) {
         console.log('\n======\n' + req.body.type + '\n======\n' + req.body.breed + '\n======\n' + req.body.age + '\n======\n' + req.body.gender);
     
         let query = {};
@@ -127,23 +120,19 @@ module.exports = function (app) {
     
         if(req.body.age != '') {
             query.age = req.body.age
-        }
 
-        if(req.body.age === '0-3') {
-            query.age = {
-                lte: 3
-            }
-        }
-        
-        if (req.body.age === '4-7') {
-            query.age = {
-                between: [4, 7]
-            }
-        } 
-        
-        if (req.body.age === '8+') {
-            query.age = {
-                gte: 8
+            if(req.body.age === '0-3') {
+                query.age = {
+                    lte: 3
+                }
+            } else if(req.body.age === '4-7') {
+                query.age = {
+                    between: [4, 7]
+                }
+            } else {
+                query.age = {
+                    gte: 8
+                }
             }
         }
     
@@ -156,13 +145,27 @@ module.exports = function (app) {
             where: query
         }).then(data => {
             let Pets = [];
-    
-            for(pet in data) {
+            let Types = [];
+            let Breeds = [];
+
+            for (pet in data) {
                 Pets.push(data[pet]);
+
+                if(!Types.includes(data[pet].type)) {
+                    Types.push(data[pet].type);
+                }
+
+                if(!Breeds.includes(data[pet].breed)) {
+                    if(data[pet].breed !== '') {
+                        Breeds.push(data[pet].breed);
+                    }
+                }
             }
     
             res.render('pets', {
                 pets: Pets,
+                types: Types,
+                breeds: Breeds,
                 isUser: req.isAuthenticated()
             })
         })
@@ -230,18 +233,21 @@ module.exports = function (app) {
 
     //Get owner's friends (no data)
     app.get('/home', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('home', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                isUser: req.isAuthenticated()
+        if(req.isAuthenticated()) {
+            models.Owners.findOne({
+                where: {
+                    id: req.user.id
+                }
+            }).then(data => {
+                res.render('home', {
+                    ownerPicture: data.picture,
+                    ownerName: data.name,
+                    isUser: req.isAuthenticated()
+                });
             });
-        });
-
+        } else {
+            res.redirect('/');
+        }
     });
 
     //Get owner's pet to view-my-pets
