@@ -10,12 +10,6 @@ module.exports = function (app) {
             },
             include: [models.Pets]
         }).then(data => {
-            let canEdit = false;
-            if (req.isAuthenticated()) {
-                if ((req.user.id * 1) === (req.params.id * 1)) {
-                    canEdit = true;
-                }
-            }
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
@@ -23,9 +17,7 @@ module.exports = function (app) {
                 location: data.location,
                 email: data.email,
                 pets: data.Pets,
-                bio: data.bio,
-                canEdit: canEdit,
-                isUser: req.isAuthenticated()
+                bio: data.bio
             });
         });
     });
@@ -46,31 +38,34 @@ module.exports = function (app) {
         });
     });
 
-    //Get a pet by id
     app.get('/pets/:id', function (req, res) {
-
+        
         models.Pets.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            incldue: [models.Owners]
         }).then(data => {
-            let canEdit = false;
-            let petOwnerId = 0;
-            if (req.isAuthenticated()) {
-                if ((data.OwnerId * 1) === (req.user.id * 1)) {
-                    ///Prepare owner Id to be sent
-                    petOwnerId = req.user.id * 1;
-                    canEdit = true;
+            models.Owners.findOne({
+                where: {
+                    id: data.OwnerId
                 }
-            }
-
-            res.render('pet', {
-                id: req.params.id,
-                name: data.name,
-                picture: data.picture,
-                petOwnerId: petOwnerId, /////sending the owner Id
-                canEdit: canEdit,
-                isUser: req.isAuthenticated()
+            }).then(ownerData => {
+                console.log(ownerData.name);
+                res.render('pet', {
+                    id: req.params.id,
+                    name: data.name,
+                    picture: data.picture,
+                    age: data.age,
+                    type: data.type,
+                    breed: data.breed,
+                    bio: data.bio,
+                    location: ownerData.location,
+                    ownerName: ownerData.name,
+                    ownerAge: ownerData.age,
+                    ownerPicture: ownerData.picture,
+                    ownerId: ownerData.id
+                });
             });
         });
     });
