@@ -19,7 +19,10 @@ module.exports = function (app) {
             res.render('owner', {
                 name: data.name,
                 picture: data.picture,
+                age: data.age,
+                location: data.location,
                 pets: data.Pets,
+                bio: data.bio,
                 canEdit: canEdit,
                 isUser: req.isAuthenticated()
             });

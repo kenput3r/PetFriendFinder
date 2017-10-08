@@ -5,10 +5,9 @@
     <form method="post" name="filter" action="http://localhost:8080/pets/filter">
 
         <select data-placeholder='Type' class='chosen-select' name="type" id='type'>
-            <option value=''></option>
+            <option selected="selected">Pet Type</option>
             <option value='dog'>Dog</option>
             <option value='cat'>Cat</option>
-            <option value='bird'>Bird</option>
         </select>
 
 
@@ -31,7 +30,7 @@
             <option value='male'>Male</option>
         </select>
 
-        <input type="submit" value="Search" id="submit"/>
+        <input type="submit" value="Search" id="submit" disabled/>
     </form>
 </div>
 
