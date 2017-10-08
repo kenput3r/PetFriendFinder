@@ -21,6 +21,7 @@ module.exports = function (app) {
                 picture: data.picture,
                 age: data.age,
                 location: data.location,
+                email: data.email,
                 pets: data.Pets,
                 bio: data.bio,
                 canEdit: canEdit,

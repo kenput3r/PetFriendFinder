@@ -1,26 +1,46 @@
-<main class="container-fluid">
-    <div id="OwnerHeader" class="row">
-        
-        <div id="OwnerPicture" class="col-md-3">
-            <img src="{{picture}}" class="img-fluid" />
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="rounded mx-auto img-fluid" src="{{picture}}" alt="{{name}}">
+                <h1>{{name}}</h1>
+                <p>{{email}}</p>
+                <p>{{bio}}</p>
+            </div>
+            <div class="col-md-9">
+                <ul class="nav nav-tabs pet-margin-b-sm">
+                    <li class="nav-item">
+                        <a id="view-post" class="nav-link" href="/profile">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="view-pets" class="nav-link" href="/profile/view-pets">Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="view-friends" class="nav-link" href="/profile/view-friends">Friends</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="edit-profile" class="nav-link" href="/profile/edit-profile">Edit Profile</a>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <h2 class="text-left" style="display: inline-block">My Pets</h2>
+                        <button type="button" class="btn btn-primary pet-margin-b-sm pet-margin-l-sm" data-toggle="modal" data-target="#add-pet">Add a Pet</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card-deck">
+                        {{#each pets}}
+                        <div class="card">
+                            <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
+                            <div class="card-body">
+                                <h4 class="card-title text-center">{{name}}</h4>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div id="OwnerDetails" class="col-md-9">
-            <h2>{{name}}</h2>
-            <h3>{{age}}</h3>
-            <h3>{{location}}</h3>
-            <p>{{bio}}</p>
-        </div>
-        
     </div>
-        {{#each pets}}
-            <p>{{name}}</p>
-            <img src="{{picture}}" />
-        {{/each}}
-
-        {{#if canEdit}}
-
-        {{else}}
-            <p>I can't edit this</p>
-        {{/if}}
-</main>        
+</main>
