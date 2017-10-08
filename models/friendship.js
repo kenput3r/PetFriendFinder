@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes){
             Friendships.belongsTo(models.Pets, {
                 as: 'myPet',
                 foreignKey: 'myPetId'
+            },
+            {
+              
             });
             
             Friendships.belongsTo(models.Pets, {
@@ -16,7 +19,7 @@ module.exports = function(sequelize, DataTypes){
                 foreignKey: 'friendPetId'
             },
             {
-                onDelete: "cascade"
+              
             });
         
     };

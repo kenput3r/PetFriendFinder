@@ -1,14 +1,26 @@
-    <h2>{{name}}</h2>
+<main class="container-fluid">
+    <div id="OwnerHeader" class="row">
+        
+        <div id="OwnerPicture" class="col-md-3">
+            <img src="{{picture}}" class="img-fluid" />
+        </div>
 
-    <img src="{{picture}}" />
+        <div id="OwnerDetails" class="col-md-9">
+            <h2>{{name}}</h2>
+            <h3>{{age}}</h3>
+            <h3>{{location}}</h3>
+            <p>{{bio}}</p>
+        </div>
+        
+    </div>
+        {{#each pets}}
+            <p>{{name}}</p>
+            <img src="{{picture}}" />
+        {{/each}}
 
-    {{#each pets}}
-        <p>{{name}}</p>
-        <img src="{{picture}}" />
-    {{/each}}
+        {{#if canEdit}}
 
-    {{#if canEdit}}
-
-    {{else}}
-        <p>I can't edit this</p>
-    {{/if}}
+        {{else}}
+            <p>I can't edit this</p>
+        {{/if}}
+</main>        

@@ -1,11 +1,44 @@
-<h2>{{name}}</h2>
+<div class="row">
+    
+    <section class="col-md-6 col-sm-12">
+      <form action="/myPets" method="post"> 
 
-<img src="{{picture}}" />
+        <h2>{{name}}</h2>
 
-{{#if canEdit}}
-    <p>I can edit this</p>
-{{else}}
-    <p>I can't edit this</p>
-{{/if}}
+        <img src="{{picture}}" />
 
- <a href="/owners/{{petOwnerId}}" class="btn btn-primary">Add Friend</a>
+        <input type="hidden" name="friendPetId" value={{id}}>
+
+        {{#if canEdit}}
+            <p>I can edit this</p>
+        {{else}}
+            <p>I can't edit this</p>
+        {{/if}}
+
+         <input type="submit" value="Add Friend" id="submit"/>
+
+      </form> 
+    </section>
+</div>   
+
+
+<div class="row">
+<section class="col-md-6 col-sm-12">
+            {{#each mypets}}
+
+              <form action="/api/friendships" method="post">  
+                <div class="card float-right" style="width: 20rem;">
+                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text">{{bio}}</p>
+                    <input type="hidden" name="friendPetId" value={{../friendPetId}}>
+                    <input type="hidden" name="myPetId" value={{id}}>
+                    <input type="submit" value="Make Friendship" id="submit"/>
+                </div>
+                </div>
+              </form> 
+            {{/each}}
+        </section>
+</div>    
+
