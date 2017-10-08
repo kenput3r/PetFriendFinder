@@ -28,6 +28,10 @@
     margin: 0 0 10px 0;
 }
 
+.card-body .btn {
+    width: 100%;
+}
+
 .card-header {
     padding: .5rem .75rem;
 }

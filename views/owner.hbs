@@ -3,8 +3,9 @@
         <div class="row">
             <div class="col-md-3">
                 <img class="rounded mx-auto img-fluid" src="{{picture}}" alt="{{name}}">
-                <h1>{{name}}</h1>
+                <h1>{{name}}, {{age}}</h1>
                 <p>{{email}}</p>
+                <p>{{location}}</p>
                 <p>{{bio}}</p>
             </div>
             <div class="col-md-9">
@@ -34,7 +35,8 @@
                             <div class="card">
                                 <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
                                 <div class="card-body">
-                                    <h4 class="card-title text-center">{{name}}</h4>
+                                    <h4 class="card-title text-center">{{name}}, {{age}}</h4>
+                                    <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
                                 </div>
                             </div>
                             {{/each}}
