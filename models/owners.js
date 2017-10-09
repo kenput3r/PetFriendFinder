@@ -50,6 +50,6 @@ module.exports = function(sequelize, DataTypes) {
         Owners.hasMany(models.Pets, {
           onDelete: "cascade"
         });
-      };
+    };
     return Owners;
 };

@@ -7,6 +7,10 @@
                 <h2>{{#if breed}}{{breed}} | {{/if}}{{type}}</h2>
                 <p>{{location}}</p>
                 <p>{{bio}}</p>
+                <form action="/pets/{{id}}" method="post">
+                    <input type="hidden" value="{{id}}" name="friendPetId"/>
+                    <input type="submit" value="Add Friend" id="SubmitFriend" class="btn btn-default" />
+                </form>
             </div>
             <div class="col-md-9">
                 <ul class="nav nav-tabs pet-margin-b-sm">
@@ -31,7 +35,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="card-deck">
-                            <div class="card col-lg-6">
+                            <div class="card col-lg-12">
                                 <img class="card-img-top img-fluid" src="{{ownerPicture}}" alt="{{ownerName}}" />
                                 <div class="card-body">
                                     <h4 class="card-title text-center">{{ownerName}}, {{ownerAge}}</h4>
@@ -67,5 +71,29 @@
 
             </div>
         </div>
+
+        {{#if mypets}}
+        <section id="PetFriends">
+            <div class="row">
+                <div class="col-md-6">
+                    {{#each mypets}}
+                        <form action="/api/friendships" method="post">  
+                            <div class="card float-right" style="width: 20rem;">
+                            <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{name}}</h4>
+                                <p class="card-text">{{bio}}</p>
+                                <input type="hidden" name="friendPetId" value={{../friendPetId}}>
+                                <input type="hidden" name="myPetId" value={{id}}>
+                                <input type="submit" value="Make Friendship" id="submit"/>
+                            </div>
+                            </div>
+                        </form> 
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
     </div>
 </main>
