@@ -23,7 +23,12 @@ module.exports = function(app){
             myPetId: req.body.myPetId,
             friendPetId: req.body.friendPetId
         }).then(function(dbFriendship){
-            res.json(dbFriendship);
+            models.Pets.findAll({
+                where: sequelize.or({ id: req.body.myPetId , id: req.body.friendPetId})
+            }).then(function(data){
+                console.log(data);
+                //res.render('newFriends', )
+            })
         });
     });
 
