@@ -7,10 +7,12 @@
                 <h2>{{#if breed}}{{breed}} | {{/if}}{{type}}</h2>
                 <p>{{location}}</p>
                 <p>{{bio}}</p>
+                {{#if isUser}}
                 <form action="/pets/{{id}}" method="post">
                     <input type="hidden" value="{{id}}" name="friendPetId"/>
                     <input type="submit" value="Add Friend" id="SubmitFriend" class="btn btn-default" />
                 </form>
+                {{/if}}
             </div>
             <div class="col-md-9">
                 <ul class="nav nav-tabs pet-margin-b-sm">
