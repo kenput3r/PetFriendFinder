@@ -51,7 +51,7 @@ require('./routes/html-routes.js')(app);
 require('./routes/friendship-api.js')(app);
 
 models.sequelize.sync({
-    force: false
+    force: true
 }).then(() => {
     app.listen(PORT, () => {
         console.log('App listening on PORT ' + PORT);
