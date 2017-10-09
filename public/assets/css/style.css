@@ -1,12 +1,49 @@
-#Badges div img {
-    margin-bottom: 20px;
-    max-width: 150px;
+#Badges div {
+    margin-bottom: 40px;
+    max-width: 200px;
+    position: relative;
+}
+#Badges h6 {
+    font-size: 0.75rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#Badges img {
+    display: block;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn.disabled:hover {
+    cursor: default;
 }
 
 .card {
     margin: 0 0 10px 0;
 }
 
+.card-body .btn {
+    width: 100%;
+}
+
+.card-header {
+    padding: .5rem .75rem;
+}
+
+#Filters {
+    margin-bottom: 20px;
+}
+
 .navbar {
     margin-bottom: 20px;
+}
+
+.nav-link:hover {
+    cursor: pointer;
 }
