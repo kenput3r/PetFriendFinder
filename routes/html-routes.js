@@ -66,7 +66,8 @@ module.exports = function (app) {
                     ownerAge: ownerData.age,
                     ownerPicture: ownerData.picture,
                     ownerId: ownerData.id,
-                    isUser: req.isAuthenticated()
+                    isUser: req.isAuthenticated(),
+                    userId: req.user.id
                 });
             });
         });
