@@ -65,8 +65,19 @@
                             <h2 class="text-left" style="display: inline-block">Friends</h2>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col">Coming Soon</div>
+                    <div class="row">
+                        {{#each friendPets}}
+                        <div class="col-md-6">
+                            <div class="card float-right" style="width: 20rem;">
+                                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{name}}</h4>
+                                    <p class="card-text">{{bio}}</p>
+                                    <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
                 </section>
 

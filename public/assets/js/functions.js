@@ -21,7 +21,7 @@ function getUsersPets(userId) {
         console.log(data);
         for(pet in data) {
             var $col = $('<div>', {class: 'col-md-6'});
-            var $form = $('<form>', {class: 'add-friend'});
+            var $form = $('<form>', {class: 'add-friend', method: 'post'});
             var $card = $('<div>', {class: 'card float-right'});
             var $cardImage = $('<img>',
                 {
@@ -36,6 +36,7 @@ function getUsersPets(userId) {
                 {
                     type: 'hidden',
                     name: 'friendPetId',
+                    class: 'friendPetId',
                     value: $('#FriendPetId').val()
                 }
             );
@@ -43,6 +44,7 @@ function getUsersPets(userId) {
                 {
                     type: 'hidden',
                     name: 'myPetId',
+                    class: 'myPetId',
                     value: data[pet].id
                 }
             );
@@ -51,7 +53,7 @@ function getUsersPets(userId) {
                 {
                     type: 'submit',
                     value: 'Add Friend',
-                    id: 'MatchFriend'
+                    class: 'MatchFriend'
                 }
             );
 
@@ -59,20 +61,35 @@ function getUsersPets(userId) {
             $card.append($cardImage);
             $card.append($cardBody);
             $cardBody.append($cardTitle);
+            $cardTitle.html(data[pet].name);
             $cardBody.append($friendPetId);
             $cardBody.append($myPetId);
             $cardBody.append($makeFriendship);
 
             $col.append($form);
 
-            $('#AsyncFriends').html('');
             $('#AsyncFriends').append($col);
         }
+        $('.add-friend').each(function() {
+            let friendPetId = $(this).find('.friendPetId').val();
+            let myPetId = $(this).find('.myPetId').val();
+            console.log('friendPetId', friendPetId);
+            console.log('myPetId', myPetId);
+            $(this).find('.MatchFriend').on('click', function(event) {
+                event.preventDefault();
+                $.post('/api/friendships', {myPetId: myPetId, friendPetId: friendPetId})
+                .done(function(response) {
+                    $('#AsyncFriends').html(response);
+                });
+            })
+        });
+
     });
 }
 
 $('#SubmitFriend').on('click', function(event) {
     event.preventDefault();
     var userId = $('#AddFriendForm').attr('data-userId');
+    $('#AsyncFriends').html('');
     getUsersPets(userId);
 });
