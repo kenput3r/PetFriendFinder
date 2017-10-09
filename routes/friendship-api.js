@@ -19,16 +19,35 @@ module.exports = function(app){
 
     //Create friendship
     app.post('/api/friendships', function(req, res){
-        models.Friendships.create({
-            myPetId: req.body.myPetId,
-            friendPetId: req.body.friendPetId
-        }).then(function(dbFriendship){
-            models.Pets.findAll({
-                where: sequelize.or({ id: req.body.myPetId , id: req.body.friendPetId})
-            }).then(function(data){
-                console.log(data);
-                //res.render('newFriends', )
-            })
+        models.Friendships.findOne({
+            where: {
+                myPetId: req.body.myPetId,
+                friendPetId: req.body.friendPetId
+            }
+        }).then(data => {
+            if(!data){
+                models.Friendships.create({
+                    myPetId: req.body.myPetId,
+                    friendPetId: req.body.friendPetId
+                }).then(function(dbFriendship){
+                    models.Pets.findAll({
+                        where:
+                        {
+                            $or: [
+                                { id: req.body.myPetId },
+                                { id: req.body.friendPetId }
+                              ]
+                        }
+        
+                    }).then(function(petsData){
+                        res.json(petsData);
+                    });
+                });
+            }
+            else{
+                console.log("friendship already exists");
+                res.send("friendship already exists");
+            }
         });
     });
 

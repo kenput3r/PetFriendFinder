@@ -45,42 +45,53 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            incldue: [models.Owners]
+            include: [models.Owners]
         }).then(data => {
             models.Owners.findOne({
                 where: {
                     id: data.OwnerId
                 }
             }).then(ownerData => {
-                console.log(ownerData.name);
-                res.render('pet', {
-                    id: req.params.id,
-                    name: data.name,
-                    picture: data.picture,
-                    age: data.age,
-                    type: data.type,
-                    breed: data.breed,
-                    bio: data.bio,
-                    location: ownerData.location,
-                    ownerName: ownerData.name,
-                    ownerAge: ownerData.age,
-                    ownerPicture: ownerData.picture,
-                    ownerId: ownerData.id,
-                    isUser: req.isAuthenticated()
-                });
+                models.Friendships.findAll({
+                    attributes: ['friendPetId'],
+                    where: {myPetId : req.params.id},
+                    include: ['friendPet']
+                }).then(petsFriendsData =>{
+                    console.log(ownerData.name);
+
+                    let Pets = [];
+
+                    for(pet in petsFriendsData) {
+                        console.log(petsFriendsData[pet].friendPet.name);
+                        console.log("============================");
+                        Pets.push(petsFriendsData[pet].friendPet);
+                    }
+                    
+                    res.render('pet', {
+                        id: req.params.id,
+                        name: data.name,
+                        picture: data.picture,
+                        age: data.age,
+                        type: data.type,
+                        breed: data.breed,
+                        bio: data.bio,
+                        location: ownerData.location,
+                        ownerName: ownerData.name,
+                        ownerAge: ownerData.age,
+                        ownerPicture: ownerData.picture,
+                        ownerId: ownerData.id,
+                        isUser: req.isAuthenticated(),
+                        friendPets: Pets
+                    });
+                })
+
+                
             });
         });
     });
 
-<<<<<<< HEAD
-
-    //Get a pet by id
-
-    app.get('/pets/:id', function (req, res) {
-=======
     app.post('/pets/:id', function (req, res) {
         
->>>>>>> master
         models.Pets.findOne({
             where: {
                 id: req.params.id
@@ -97,38 +108,47 @@ module.exports = function (app) {
                         OwnerId: req.user.id * 1
                     }
                 }).then(friendChoices => {
+                    
                     let Pets = [];
 
                     for(pet in friendChoices) {
-                        Pets.push(friendChoices[pet]);
+                        ///showing from my pets only the ones who are NOT already friends with this pet
+                        models.Friendships.findOne({
+                            where: {
+                                myPetId: friendChoices[pet].id,
+                                friendPetId: req.params.id
+                            }
+                        }).then(data => {
+                            if(!data){
+                                Pets.push(friendChoices[pet]);
+                            }
+                            else{
+                                
+                            }
+                    
+                            res.render('pet', {
+                                id: req.params.id,
+                                name: data.name,
+                                picture: data.picture,
+                                age: data.age,
+                                type: data.type,
+                                breed: data.breed,
+                                bio: data.bio,
+                                location: ownerData.location,
+                                ownerName: ownerData.name,
+                                ownerAge: ownerData.age,
+                                ownerPicture: ownerData.picture,
+                                ownerId: ownerData.id,
+                                friendPetId: req.body.friendPetId,
+                                mypets: Pets,
+                                isUser: req.isAuthenticated()
+                            });
+                        });
                     }
-                    res.render('pet', {
-                        id: req.params.id,
-                        name: data.name,
-                        picture: data.picture,
-                        age: data.age,
-                        type: data.type,
-                        breed: data.breed,
-                        bio: data.bio,
-                        location: ownerData.location,
-                        ownerName: ownerData.name,
-                        ownerAge: ownerData.age,
-                        ownerPicture: ownerData.picture,
-                        ownerId: ownerData.id,
-                        friendPetId: req.body.friendPetId,
-                        mypets: Pets,
-                        isUser: req.isAuthenticated()
-                    });
-                });
             });
         });
     });
 
-<<<<<<< HEAD
-    app.post('/pets/filter', function(req, res) {
-        console.log("=========" + req.body.type + "========" + req.body.breed + "========" + req.body.age + "======" + req.body.gender);
-
-=======
     //Get all pets
     app.get('/pets', function (req, res) {
         models.Pets.findAll({}).then(data => {
@@ -164,7 +184,6 @@ module.exports = function (app) {
     
         let query = {};
     
->>>>>>> master
         var age = 0;
 
         if(req.body.type != '') {
