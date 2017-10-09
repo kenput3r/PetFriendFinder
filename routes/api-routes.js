@@ -107,4 +107,15 @@ module.exports = function (app) {
         })
     });
 
+    //Get logged in user pets
+    app.get('/api/users-pets/:id', function(req, res) {
+        models.Pets.findAll({
+            where: {
+                OwnerId: req.params.id * 1
+            }
+        }).then(data => {
+            res.json(data);
+        });
+    });
+
 }
