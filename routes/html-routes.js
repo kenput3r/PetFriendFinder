@@ -370,30 +370,28 @@ module.exports = function (app) {
 
     });
 
-    // //Get the current owner pets to choose from for the friendship
-    // app.post('/myPets', function(req, res){
-    //     console.log(req.body.friendPetId);
-    //     var friendPetId = req.body.friendPetId * 1;
-    //     models.Pets.findAll({
-    //         where: {
-    //             OwnerId: req.user.id * 1
-    //         },
-    //     }).then(friendRequestData => {
+    //Get the current owner pets to choose from for the friendship
+    app.post('/myPets', function(req, res){
+        var friendPetId = req.body.friendPetId * 1;
+        models.Pets.findAll({
+            where: {
+                OwnerId: req.user.id * 1
+            },
+        }).then(data => {
            
-
-    //         let Pets = [];
+            let Pets = [];
             
-    //         for (pet in friendRequestData) {
-    //             Pets.push(data[pet]);
-    //         }
+            for (pet in data) {
+                Pets.push(data[pet]);
+            }
 
-    //         res.render('pet', {
-    //             friendPetId: friendPetId,
-    //             mypets: Pets,
-    //             isUser: req.isAuthenticated()
-    //         });
-    //     });
-    // });
+            res.render('pet', {
+                friendPetId: friendPetId,
+                mypets: Pets,
+                isUser: req.isAuthenticated()
+            });
+        });
+    });
 
     //Get all pets
     app.get('/find-pet-friend', function (req, res) {
