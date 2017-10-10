@@ -3,7 +3,9 @@ const models = require('../models');
 module.exports = function(app){
     // Get all posts
     app.get('/api/posts', function(req, res){
-        models.Posts.findAll().then(function(data){
+        models.Posts.findAll({
+            include: [models.Owners]
+        }).then(function(data){
             res.json(data);
         });
     });

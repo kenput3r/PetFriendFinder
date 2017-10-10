@@ -8,7 +8,8 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [models.Pets]
+            include: [models.Pets],
+            //include: [models.Posts]
         }).then(data => {
             res.render('owner', {
                 name: data.name,
@@ -192,7 +193,9 @@ module.exports = function (app) {
 
     //Get all pets
     app.get('/pets', function (req, res) {
-        models.Pets.findAll({}).then(data => {
+        models.Pets.findAll({
+            where: {OwnerId :{$ne:req.user.id}}
+        }).then(data => {
             let Pets = [];
             let Types = [];
             let Breeds = [];
