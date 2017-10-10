@@ -39,41 +39,6 @@ module.exports = function (app) {
         });
     });
 
-    // app.get('/pets/:id', function (req, res) {
-
-    //     models.Pets.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         },
-    //         incldue: [models.Owners]
-    //     }).then(data => {
-    //         models.Owners.findOne({
-    //             where: {
-    //                 id: data.OwnerId
-    //             }
-    //         }).then(ownerData => {
-    //             console.log(ownerData.name);
-    //             res.render('pet', {
-    //                 id: req.params.id,
-    //                 name: data.name,
-    //                 picture: data.picture,
-    //                 age: data.age,
-    //                 type: data.type,
-    //                 breed: data.breed,
-    //                 bio: data.bio,
-    //                 location: ownerData.location,
-    //                 ownerName: ownerData.name,
-    //                 ownerAge: ownerData.age,
-    //                 ownerPicture: ownerData.picture,
-    //                 ownerId: ownerData.id,
-    //                 isUser: req.isAuthenticated(),
-    //                 userId: req.user.id
-    //             });
-    //         });
-    //     });
-    // });
-
-
     app.get('/pets/:id', function (req, res) {
 
         models.Pets.findOne({
