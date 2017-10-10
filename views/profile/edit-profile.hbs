@@ -20,7 +20,7 @@
                     </div>
                 </form>
 
-                <form id="edit-profile" name="edit-profile" method="post" action="/profile/edit-profile">
+                <form id="edit-profile" name="edit-profile" method="post" action="/api/edit-profile">
                     <div class="form-group">
                         <label for="name" class="col-form-label">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name" value="{{ownerName}}">
@@ -28,10 +28,6 @@
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Email" value="{{ownerEmail}}">
-                    </div>
-                    <div class=" form-group">
-                        <label for="password" class="col-form-label">Password</label>
-                        <input class="form-control" name="password" type="password" placeholder="Password" />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -41,8 +37,8 @@
                         <div class="form-group col-md-4">
                             <label for="gender" class="col-form-label">Gender</label>
                             <select name="gender" class="form-control">
-                                <option name="gender" selected>Select One</option>
-                                <option name="gender" value="male" >Male</option>
+                                <option name="gender" selected disabled hidden>Select One</option>
+                                <option name="gender" value="male">Male</option>
                                 <option name="gender" value="female">Female</option>
                             </select>
                         </div>
@@ -64,3 +60,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

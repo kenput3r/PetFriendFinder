@@ -111,24 +111,31 @@ $(document).ready(function () {
     switch (window.location.pathname) {
 
         case '/profile':
+        case '/profile/':
             $('#view-post').addClass('active');
             break;
         case '/profile/view-pets':
+        case '/profile/view-pets/':
             $('#view-pets').addClass('active');
             break;
         case '/profile/view-friends':
+        case '/profile/view-friends/':
             $('#view-friends').addClass('active');
             break;
         case '/profile/edit-profile':
+        case '/profile/edit-profile/':
             $('#edit-profile').addClass('active');
             break;
         case '/home':
+        case '/home/':
             $('#feed').addClass('active');
             break;
         case '/find-pet-friend':
+        case '/find-pet-friend/':
             $('#find-pet-friend').addClass('active');
             break;
         case '/message':
+        case '/message/':
             $('#message').addClass('active');
             break;
     }

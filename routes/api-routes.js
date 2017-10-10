@@ -95,6 +95,22 @@ module.exports = function (app) {
     });
 
     //Updating Owner's info
+    app.post('/api/edit-profile', function (req, res) {
+        models.Owners.update({
+            name: req.body.name,
+            email: req.body.email,
+            location: req.body.location,
+            gender: req.body.gender,
+            age: req.body.age,
+            bio: req.body.bio
+        }, {
+            where: {
+                id: req.user.id
+            }
+        }).then(function (dbOwners) {
+            res.redirect('/profile/edit-profile');
+        });
+    });
 
     //Deleting a certain owner
     app.delete('/api/owners/:id', function (req, res) {
@@ -108,7 +124,7 @@ module.exports = function (app) {
     });
 
     //Get logged in user pets
-    app.get('/api/users-pets/:id', function(req, res) {
+    app.get('/api/users-pets/:id', function (req, res) {
         models.Pets.findAll({
             where: {
                 OwnerId: req.params.id * 1

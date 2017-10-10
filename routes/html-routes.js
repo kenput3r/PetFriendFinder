@@ -40,7 +40,7 @@ module.exports = function (app) {
     });
 
     // app.get('/pets/:id', function (req, res) {
-        
+
     //     models.Pets.findOne({
     //         where: {
     //             id: req.params.id
@@ -75,7 +75,7 @@ module.exports = function (app) {
 
 
     app.get('/pets/:id', function (req, res) {
-        
+
         models.Pets.findOne({
             where: {
                 id: req.params.id
@@ -89,19 +89,21 @@ module.exports = function (app) {
             }).then(ownerData => {
                 models.Friendships.findAll({
                     attributes: ['friendPetId'],
-                    where: {myPetId : req.params.id},
+                    where: {
+                        myPetId: req.params.id
+                    },
                     include: ['friendPet']
-                }).then(petsFriendsData =>{
+                }).then(petsFriendsData => {
                     console.log(ownerData.name);
 
                     let Pets = [];
 
-                    for(pet in petsFriendsData) {
+                    for (pet in petsFriendsData) {
                         console.log(petsFriendsData[pet].friendPet.name);
                         console.log("============================");
                         Pets.push(petsFriendsData[pet].friendPet);
                     }
-                    
+
                     res.render('pet', {
                         id: req.params.id,
                         name: data.name,
@@ -125,7 +127,7 @@ module.exports = function (app) {
     });
 
     app.post('/pets/:id', function (req, res) {
-        
+
         models.Pets.findOne({
             where: {
                 id: req.params.id
@@ -142,11 +144,11 @@ module.exports = function (app) {
                         OwnerId: req.user.id * 1
                     }
                 }).then(friendChoices => {
-                    
+
                     let FriendablePets = [];
                     let NonFriendablePets = [];
 
-                    for(pet in friendChoices) {
+                    for (pet in friendChoices) {
                         console.log(friendChoices[pet].id);
                         // ///showing from my pets only the ones who are NOT already friends with this pet
                         // models.Friendships.findOne({
@@ -164,8 +166,8 @@ module.exports = function (app) {
                         //         console.log(">>>>>>"+friendChoices[pet].id);
                         //     }
                         // });
-                    }        
-                    
+                    }
+
                     res.render('pet', {
                         id: req.params.id,
                         name: data.name,
@@ -180,14 +182,14 @@ module.exports = function (app) {
                         ownerPicture: ownerData.picture,
                         ownerId: ownerData.id,
                         friendPetId: req.body.friendPetId,
-                        myFriendablePets: FriendablePets,///my pets who can be friends
-                        myNonFriendablePets: NonFriendablePets,///my pets that are already friends
+                        myFriendablePets: FriendablePets, ///my pets who can be friends
+                        myNonFriendablePets: NonFriendablePets, ///my pets that are already friends
                         isUser: req.isAuthenticated()
                     });
-                });    
-                    
+                });
+
             });
-        });    
+        });
     });
 
     //Get all pets
@@ -200,12 +202,12 @@ module.exports = function (app) {
             for (pet in data) {
                 Pets.push(data[pet]);
 
-                if(!Types.includes(data[pet].type)) {
+                if (!Types.includes(data[pet].type)) {
                     Types.push(data[pet].type);
                 }
 
-                if(!Breeds.includes(data[pet].breed)) {
-                    if(data[pet].breed !== '') {
+                if (!Breeds.includes(data[pet].breed)) {
+                    if (data[pet].breed !== '') {
                         Breeds.push(data[pet].breed);
                     }
                 }
@@ -220,29 +222,29 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/pets', function(req, res) {
+    app.post('/pets', function (req, res) {
         console.log('\n======\n' + req.body.type + '\n======\n' + req.body.breed + '\n======\n' + req.body.age + '\n======\n' + req.body.gender);
-    
+
         let query = {};
-    
+
         var age = 0;
 
-        if(req.body.type != '') {
+        if (req.body.type != '') {
             query.type = req.body.type
         }
-    
-        if(req.body.breed != '') {
+
+        if (req.body.breed != '') {
             query.breed = req.body.breed
         }
-    
-        if(req.body.age != '') {
+
+        if (req.body.age != '') {
             query.age = req.body.age
 
-            if(req.body.age === '0-3') {
+            if (req.body.age === '0-3') {
                 query.age = {
                     lte: 3
                 }
-            } else if(req.body.age === '4-7') {
+            } else if (req.body.age === '4-7') {
                 query.age = {
                     between: [4, 7]
                 }
@@ -252,12 +254,12 @@ module.exports = function (app) {
                 }
             }
         }
-    
-        if(req.body.gender != '') {
+
+        if (req.body.gender != '') {
             query.gender = req.body.gender
 
         }
-    
+
         models.Pets.findAll({
             where: query
         }).then(data => {
@@ -268,17 +270,17 @@ module.exports = function (app) {
             for (pet in data) {
                 Pets.push(data[pet]);
 
-                if(!Types.includes(data[pet].type)) {
+                if (!Types.includes(data[pet].type)) {
                     Types.push(data[pet].type);
                 }
 
-                if(!Breeds.includes(data[pet].breed)) {
-                    if(data[pet].breed !== '') {
+                if (!Breeds.includes(data[pet].breed)) {
+                    if (data[pet].breed !== '') {
                         Breeds.push(data[pet].breed);
                     }
                 }
             }
-    
+
             res.render('pets', {
                 pets: Pets,
                 types: Types,
@@ -350,7 +352,7 @@ module.exports = function (app) {
 
     //Get owner's friends (no data)
     app.get('/home', function (req, res) {
-        if(req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             models.Owners.findOne({
                 where: {
                     id: req.user.id
@@ -444,16 +446,16 @@ module.exports = function (app) {
     });
 
     //Get the current owner pets to choose from for the friendship
-    app.post('/myPets', function(req, res){
+    app.post('/myPets', function (req, res) {
         var friendPetId = req.body.friendPetId * 1;
         models.Pets.findAll({
             where: {
                 OwnerId: req.user.id * 1
             },
         }).then(data => {
-           
+
             let Pets = [];
-            
+
             for (pet in data) {
                 Pets.push(data[pet]);
             }
