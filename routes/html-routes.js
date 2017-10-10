@@ -11,7 +11,10 @@ module.exports = function (app) {
             include: [models.Pets]
         }).then(data => {
             models.Posts.findAll({
-                where: { OwnerId: req.params.id }
+                where: { 
+                    OwnerId: req.params.id
+                },
+                order: [['createdAt', 'DESC']]
             }).then(posts => {
                 let Posts = [];
                 for(post in posts) {
@@ -303,13 +306,15 @@ module.exports = function (app) {
             }).then(data => {
                 models.Posts.findAll({
                     where: {
-                        id: req.user.id
-                    }
+                        OwnerId: req.user.id
+                    },
+                    order: [['createdAt', 'DESC']]
                 }).then(posts => {
                     let Posts = [];
                     for(post in posts) {
                         Posts.push(posts[post].dataValues);
                     }
+                    console.log(Posts);
                     res.render('home', {
                         ownerPicture: data.picture,
                         ownerName: data.name,
@@ -383,21 +388,21 @@ module.exports = function (app) {
         });
     });
 
-    //Get owner's friends (no data)
-    app.get('/home', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('home', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                isUser: req.isAuthenticated()
-            });
-        });
+    // //Get owner's friends (no data)
+    // app.get('/home', function (req, res) {
+    //     models.Owners.findOne({
+    //         where: {
+    //             id: req.user.id
+    //         }
+    //     }).then(data => {
+    //         res.render('home', {
+    //             ownerPicture: data.picture,
+    //             ownerName: data.name,
+    //             isUser: req.isAuthenticated()
+    //         });
+    //     });
 
-    });
+    // });
 
     //Get the current owner pets to choose from for the friendship
     app.post('/myPets', function (req, res) {
