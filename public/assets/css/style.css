@@ -40,6 +40,14 @@
     margin-bottom: 20px;
 }
 
+#Filters .row div {
+    margin-bottom: 15px;
+}
+
+#Filters .row div.text-right {
+    margin-bottom: 0;
+}
+
 .navbar {
     margin-bottom: 20px;
 }
