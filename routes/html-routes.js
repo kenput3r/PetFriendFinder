@@ -10,15 +10,27 @@ module.exports = function (app) {
             },
             include: [models.Pets]
         }).then(data => {
-            res.render('owner', {
-                name: data.name,
-                picture: data.picture,
-                age: data.age,
-                location: data.location,
-                email: data.email,
-                pets: data.Pets,
-                bio: data.bio,
-                isUser: req.isAuthenticated()
+            models.Posts.findAll({
+                where: { 
+                    OwnerId: req.params.id
+                },
+                order: [['createdAt', 'DESC']]
+            }).then(posts => {
+                let Posts = [];
+                for(post in posts) {
+                    Posts.push(posts[post].dataValues);
+                }
+                res.render('owner', {
+                    name: data.name,
+                    picture: data.picture,
+                    age: data.age,
+                    location: data.location,
+                    email: data.email,
+                    pets: data.Pets,
+                    bio: data.bio,
+                    posts: Posts,
+                    isUser: req.isAuthenticated()
+                });
             });
         });
     });
@@ -38,41 +50,6 @@ module.exports = function (app) {
             });
         });
     });
-
-    // app.get('/pets/:id', function (req, res) {
-
-    //     models.Pets.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         },
-    //         incldue: [models.Owners]
-    //     }).then(data => {
-    //         models.Owners.findOne({
-    //             where: {
-    //                 id: data.OwnerId
-    //             }
-    //         }).then(ownerData => {
-    //             console.log(ownerData.name);
-    //             res.render('pet', {
-    //                 id: req.params.id,
-    //                 name: data.name,
-    //                 picture: data.picture,
-    //                 age: data.age,
-    //                 type: data.type,
-    //                 breed: data.breed,
-    //                 bio: data.bio,
-    //                 location: ownerData.location,
-    //                 ownerName: ownerData.name,
-    //                 ownerAge: ownerData.age,
-    //                 ownerPicture: ownerData.picture,
-    //                 ownerId: ownerData.id,
-    //                 isUser: req.isAuthenticated(),
-    //                 userId: req.user.id
-    //             });
-    //         });
-    //     });
-    // });
-
 
     app.get('/pets/:id', function (req, res) {
 
@@ -139,53 +116,22 @@ module.exports = function (app) {
                     id: data.OwnerId
                 }
             }).then(ownerData => {
-                models.Pets.findAll({
-                    where: {
-                        OwnerId: req.user.id * 1
-                    }
-                }).then(friendChoices => {
 
-                    let FriendablePets = [];
-                    let NonFriendablePets = [];
-
-                    for (pet in friendChoices) {
-                        console.log(friendChoices[pet].id);
-                        // ///showing from my pets only the ones who are NOT already friends with this pet
-                        // models.Friendships.findOne({
-                        //     where: {
-                        //         myPetId: friendChoices[pet].id,
-                        //         friendPetId: req.params.id
-                        //     }
-                        // }).then(data => {
-                        //     if(data){
-                        //         NonFriendablePets.push(friendChoices[pet]);
-                        //         console.log("//////"+friendChoices[pet].id);
-                        //     }
-                        //     else{
-                        //         FriendablePets.push(friendChoices[pet]);
-                        //         console.log(">>>>>>"+friendChoices[pet].id);
-                        //     }
-                        // });
-                    }
-
-                    res.render('pet', {
-                        id: req.params.id,
-                        name: data.name,
-                        picture: data.picture,
-                        age: data.age,
-                        type: data.type,
-                        breed: data.breed,
-                        bio: data.bio,
-                        location: ownerData.location,
-                        ownerName: ownerData.name,
-                        ownerAge: ownerData.age,
-                        ownerPicture: ownerData.picture,
-                        ownerId: ownerData.id,
-                        friendPetId: req.body.friendPetId,
-                        myFriendablePets: FriendablePets, ///my pets who can be friends
-                        myNonFriendablePets: NonFriendablePets, ///my pets that are already friends
-                        isUser: req.isAuthenticated()
-                    });
+                res.render('pet', {
+                    id: req.params.id,
+                    name: data.name,
+                    picture: data.picture,
+                    age: data.age,
+                    type: data.type,
+                    breed: data.breed,
+                    bio: data.bio,
+                    location: ownerData.location,
+                    ownerName: ownerData.name,
+                    ownerAge: ownerData.age,
+                    ownerPicture: ownerData.picture,
+                    ownerId: ownerData.id,
+                    friendPetId: req.body.friendPetId,
+                    isUser: req.isAuthenticated()
                 });
 
             });
@@ -290,66 +236,6 @@ module.exports = function (app) {
         })
     });
 
-    //Get owner's pet to view-my-pets
-    app.get('/profile/view-pets', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            },
-            include: [models.Pets]
-        }).then(data => {
-            res.render('profile/view-pets', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                pets: data.Pets,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get owner's info
-    app.get('/profile/edit-profile', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('profile/edit-profile', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerAge: data.age,
-                ownerLocation: data.location,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get owner's friends (no data)
-    app.get('/profile/view-friends', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('profile/view-friends', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerAge: data.age,
-                ownerLocation: data.location,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
     //Get owner's friends (no data)
     app.get('/home', function (req, res) {
         if (req.isAuthenticated()) {
@@ -358,91 +244,28 @@ module.exports = function (app) {
                     id: req.user.id
                 }
             }).then(data => {
-                res.render('home', {
-                    ownerPicture: data.picture,
-                    ownerName: data.name,
-                    isUser: req.isAuthenticated()
+                models.Posts.findAll({
+                    where: {
+                        OwnerId: req.user.id
+                    },
+                    order: [['createdAt', 'DESC']]
+                }).then(posts => {
+                    let Posts = [];
+                    for(post in posts) {
+                        Posts.push(posts[post].dataValues);
+                    }
+                    res.render('home', {
+                        ownerPicture: data.picture,
+                        ownerName: data.name,
+                        posts: Posts,
+                        ownerId: req.user.id,
+                        isUser: req.isAuthenticated()
+                    });
                 });
             });
         } else {
             res.redirect('/');
         }
-    });
-
-    //Get owner's pet to view-my-pets
-    app.get('/profile/view-pets', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            },
-            include: [models.Pets]
-        }).then(data => {
-            res.render('profile/view-pets', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                pets: data.Pets,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get owner's info
-    app.get('/profile/edit-profile', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('profile/edit-profile', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerAge: data.age,
-                ownerLocation: data.location,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get owner's friends (no data)
-    app.get('/profile/view-friends', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('profile/view-friends', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                ownerEmail: data.email,
-                ownerAge: data.age,
-                ownerLocation: data.location,
-                ownerId: data.id,
-                ownerBio: data.bio,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get owner's friends (no data)
-    app.get('/home', function (req, res) {
-        models.Owners.findOne({
-            where: {
-                id: req.user.id
-            }
-        }).then(data => {
-            res.render('home', {
-                ownerPicture: data.picture,
-                ownerName: data.name,
-                isUser: req.isAuthenticated()
-            });
-        });
-
     });
 
     //Get the current owner pets to choose from for the friendship

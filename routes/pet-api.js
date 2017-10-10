@@ -3,33 +3,6 @@ const models = require('../models');
 
 module.exports = function(app) {
 
-    // //Get all pets
-    // app.get('/api/pets', function(req, res) {
-    //     let query = {};
-    //     if(req.query.owner_id) {
-    //         query.OwnerId = req.query.owner_id;
-    //     }
-
-    //     models.Pets.findAll({
-    //         where: query,
-    //         include: [models.Owners]
-    //     }).then(function(dbPets) {
-    //         res.json(dbPets);
-    //     });
-    // });
-
-    // //Get single pet
-    // app.get('/api/pets/:id', function(req, res) {
-    //     models.Pets.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         },
-    //         include: [models.Owners]
-    //     }).then(function(dbPets) {
-    //         res.json(dbPets);
-    //     });
-    // });
-
     //Post new pet with picture
     app.post('/api/pets', function(req, res) {
         let imgPath;

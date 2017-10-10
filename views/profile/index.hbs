@@ -10,8 +10,15 @@
                     <h2 class="text-left" style="display: inline-block">My Posts</h2>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                No posts
+            <div class="row">
+                {{#each posts}}
+                <div class="card mb-3 w-100">
+                    <div class="card-body text-secondary">
+                        <p class="card-text">{{body}}</p>
+                    </div>
+                    <div class="card-footer bg-transparent"><small>{{createdAt}}</small></div>
+                </div>
+                {{/each}}
             </div>
         </div>
     </div>
