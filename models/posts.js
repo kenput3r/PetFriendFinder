@@ -7,10 +7,13 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1]
             }
         },
-        ownerId: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        }
     });
+    Posts.associate = function(models) {
+        Posts.belongsTo(models.Owners, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
     return Posts;
 };
