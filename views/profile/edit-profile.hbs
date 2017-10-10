@@ -36,8 +36,8 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="gender" class="col-form-label">Gender</label>
-                            <select name="gender" class="form-control">
-                                <option name="gender" selected disabled hidden>Select One</option>
+                            <select required name="gender" class="form-control">
+                                <option name="gender" selected disabled hidden value="">Select One</option>
                                 <option name="gender" value="male">Male</option>
                                 <option name="gender" value="female">Female</option>
                             </select>
@@ -52,7 +52,7 @@
                         <textarea class="form-control" name="bio" type="text" rows="3">{{ownerBio}}</textarea>
                     </div>
                     <div class="form-group text-right">
-                        <button type="submit" class="btn btn-danger">Cancel</button>
+                        <button id="cancel-edit" class="btn btn-danger" type="button">Cancel</button>
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </form>

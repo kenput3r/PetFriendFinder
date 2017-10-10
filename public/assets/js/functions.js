@@ -108,6 +108,10 @@ $(document).ready(function () {
         });
     });
 
+    $('#cancel-edit').on('click', function () {
+        location.reload();
+    });
+
     switch (window.location.pathname) {
 
         case '/profile':
