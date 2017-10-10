@@ -301,10 +301,21 @@ module.exports = function (app) {
                     id: req.user.id
                 }
             }).then(data => {
-                res.render('home', {
-                    ownerPicture: data.picture,
-                    ownerName: data.name,
-                    isUser: req.isAuthenticated()
+                models.Posts.findAll({
+                    where: {
+                        id: req.user.id
+                    }
+                }).then(posts => {
+                    let Posts = [];
+                    for(post in posts) {
+                        Posts.push(posts[post].dataValues);
+                    }
+                    res.render('home', {
+                        ownerPicture: data.picture,
+                        ownerName: data.name,
+                        posts: Posts,
+                        isUser: req.isAuthenticated()
+                    });
                 });
             });
         } else {
