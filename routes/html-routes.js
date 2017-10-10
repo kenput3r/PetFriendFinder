@@ -10,15 +10,24 @@ module.exports = function (app) {
             },
             include: [models.Pets]
         }).then(data => {
-            res.render('owner', {
-                name: data.name,
-                picture: data.picture,
-                age: data.age,
-                location: data.location,
-                email: data.email,
-                pets: data.Pets,
-                bio: data.bio,
-                isUser: req.isAuthenticated()
+            models.Posts.findAll({
+                where: { OwnerId: req.params.id }
+            }).then(posts => {
+                let Posts = [];
+                for(post in posts) {
+                    Posts.push(posts[post].dataValues);
+                }
+                res.render('owner', {
+                    name: data.name,
+                    picture: data.picture,
+                    age: data.age,
+                    location: data.location,
+                    email: data.email,
+                    pets: data.Pets,
+                    bio: data.bio,
+                    posts: Posts,
+                    isUser: req.isAuthenticated()
+                });
             });
         });
     });
