@@ -51,13 +51,12 @@
                         </div>
                     </div>
                     <div class="row">
-            
                         {{#each posts}}
-                        <div class="card mb-3">
+                        <div class="card mb-3 w-100">
                             <div class="card-body text-secondary">
                                 <p class="card-text">{{body}}</p>
                             </div>
-                            <div class="card-footer bg-transparent">{{createdAt}}</div>
+                            <div class="card-footer bg-transparent"><small>{{createdAt}}</small></div>
                         </div>
                         {{/each}}
                     </div>
