@@ -5,7 +5,7 @@
         <form method="post" name="filter" action="/pets">
             <div class="row">
 
-                <div class="col">
+                <div class="col-sm-6 col-md-4 col-lg-3">
                     <select data-placeholder='Type' class='chosen-select form-control' name="type" id='type'>
                         <option selected="selected">Pet Type</option>
                         {{#each types}}
@@ -14,7 +14,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-sm-6 col-md-4 col-lg-3">
                     <select data-placeholder='Breed' class='chosen-select form-control' name="breed" id='breed'>
                         <option value="" selected="selected">Breed</option>
                         <option value="">No Preference</option>
@@ -24,7 +24,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-sm-6 col-md-4 col-lg-3">
                     <select data-placeholder='Age' class='chosen-select form-control' name="age" id='age'>
                         <option value="" selected="selected">Age</option>
                         <option value="">No Preference</option>
@@ -34,7 +34,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-sm-6 col-md-4 col-lg-3">
                     <select data-placeholder='Gender' class='chosen-select form-control' name="gender" id='gender'>
                         <option value="" selected="Gender">Gender</option>
                         <option value="">No Preference</option>
@@ -43,7 +43,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col text-right">
                     <input type="submit" value="Search" id="submit" class="btn btn-primary disabled" disabled/>
                     <a href="/pets" class="btn btn-danger">Clear</a>
                 </div>
@@ -55,7 +55,7 @@
         <section class="col-md-6 col-sm-12">
             {{#each pets}}
                 
-                <div class="card float-right" style="width: 20rem;">
+                <div class="card float-right">
                 <img class="card-img-top" src="{{picture}}" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">{{name}}</h4>
