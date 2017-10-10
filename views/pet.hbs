@@ -7,10 +7,12 @@
                 <h2>{{#if breed}}{{breed}} | {{/if}}{{type}}</h2>
                 <p>{{location}}</p>
                 <p>{{bio}}</p>
-                <form action="/pets/{{id}}" method="post">
-                    <input type="hidden" value="{{id}}" name="friendPetId"/>
-                    <input type="submit" value="Add Friend" id="SubmitFriend" class="btn btn-default" />
+                {{#if isUser}}
+                <form action="/pets/{{id}}" method="post" id="AddFriendForm" data-userId="{{userId}}">
+                    <input type="hidden" value="{{id}}" name="friendPetId" id="FriendPetId"/>
+                    <input type="submit" value="Add Friend" id="SubmitFriend" class="btn btn-default" data-toggle="modal" data-target="#FriendsModal" />
                 </form>
+                {{/if}}
             </div>
             <div class="col-md-9">
                 <ul class="nav nav-tabs pet-margin-b-sm">
@@ -73,8 +75,19 @@
                             {{/each}}
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col">Coming Soon</div>
+                    <div class="row">
+                        {{#each friendPets}}
+                        <div class="col-md-6">
+                            <div class="card float-right" style="width: 20rem;">
+                                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{name}}</h4>
+                                    <p class="card-text">{{bio}}</p>
+                                    <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
                 </section>
 
@@ -128,5 +141,15 @@
         </section>
         {{/if}}
 
+        <div id="FriendsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="friendModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid">
+                        <h3 class="modal-title">Which Pet Would You Like To Match With?</h3>
+                        <div id="AsyncFriends" class="row"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>

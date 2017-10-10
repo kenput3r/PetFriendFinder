@@ -40,7 +40,8 @@ module.exports = function(app){
                         }
         
                     }).then(function(petsData){
-                        res.json(petsData);
+                        //res.json(petsData);
+                        res.send('Friend Added!');
                     });
                 });
             }
