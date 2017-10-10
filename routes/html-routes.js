@@ -254,7 +254,6 @@ module.exports = function (app) {
                     for(post in posts) {
                         Posts.push(posts[post].dataValues);
                     }
-                    console.log(Posts);
                     res.render('home', {
                         ownerPicture: data.picture,
                         ownerName: data.name,
