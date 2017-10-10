@@ -132,6 +132,7 @@ $(document).ready(function () {
             $cardFooter.html('<small>just now</small>');
 
             $('#Posts').prepend($card);
+            $('#PostBody').val('');
         });
         
     });
