@@ -8,10 +8,88 @@ $('#type').change(function() {
 });
 
 $('.section-change').click(function() {
-    let hideId = $('.section-change.active').attr('data-section');
-    let showId = $(this).attr('data-section');
+    var hideId = $('.section-change.active').attr('data-section');
+    var showId = $(this).attr('data-section');
     $('.section-change.active').removeClass('active');
     $(this).addClass('active');
     $(hideId).addClass('d-none');
     $(showId).removeClass('d-none');
+});
+
+function getUsersPets(userId) {
+    $.get('/api/users-pets/' + userId).done(function(data) {
+        console.log(data);
+        for(pet in data) {
+            var $col = $('<div>', {class: 'col-md-6'});
+            var $form = $('<form>', {class: 'add-friend', method: 'post'});
+            var $card = $('<div>', {class: 'card float-right'});
+            var $cardImage = $('<img>',
+                {
+                    src: data[pet].picture,
+                    class: 'card-img-top',
+                    alt: data[pet].name 
+                }
+            );
+            var $cardBody = $('<div>', {class: 'card-body'});
+            var $cardTitle = $('<h4>', {class: 'card-title'});
+            var $friendPetId = $('<input>',
+                {
+                    type: 'hidden',
+                    name: 'friendPetId',
+                    class: 'friendPetId',
+                    value: $('#FriendPetId').val()
+                }
+            );
+            var $myPetId = $('<input>',
+                {
+                    type: 'hidden',
+                    name: 'myPetId',
+                    class: 'myPetId',
+                    value: data[pet].id
+                }
+            );
+
+            var $makeFriendship = $('<input>',
+                {
+                    type: 'submit',
+                    value: 'Add Friend',
+                    class: 'MatchFriend'
+                }
+            );
+
+            $form.append($card);
+            $card.append($cardImage);
+            $card.append($cardBody);
+            $cardBody.append($cardTitle);
+            $cardTitle.html(data[pet].name);
+            $cardBody.append($friendPetId);
+            $cardBody.append($myPetId);
+            $cardBody.append($makeFriendship);
+
+            $col.append($form);
+
+            $('#AsyncFriends').append($col);
+        }
+        $('.add-friend').each(function() {
+            let friendPetId = $(this).find('.friendPetId').val();
+            let myPetId = $(this).find('.myPetId').val();
+            console.log('friendPetId', friendPetId);
+            console.log('myPetId', myPetId);
+            $(this).find('.MatchFriend').on('click', function(event) {
+                event.preventDefault();
+                $.post('/api/friendships', {myPetId: myPetId, friendPetId: friendPetId})
+                .done(function(response) {
+                    $('#AsyncFriends').html(response);
+                });
+            })
+        });
+
+    });
+}
+
+$('#SubmitFriend').on('click', function(event) {
+    event.preventDefault();
+    var userId = $('#AddFriendForm').attr('data-userId');
+    $('#AsyncFriends').html('');
+    getUsersPets(userId);
 });
