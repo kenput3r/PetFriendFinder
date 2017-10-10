@@ -60,7 +60,7 @@
                         <div class="col">
                             <h2 class="text-left" style="display: inline-block">Friends</h2>
                             {{#each friendPets}}
-                                <div class="card float-right" style="width: 20rem;">
+                                <div class="card" style="width: 20rem;">
                                     <img class="card-img-top" src="{{picture}}" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">{{name}}</h4>
@@ -71,6 +71,8 @@
                             {{/each}}
                         </div>
                     </div>
+
+                    {{#if allowed}}
                     <div class="row">
                         {{#each friendPets}}
                         <div class="col-md-6">
@@ -85,6 +87,7 @@
                         </div>
                         {{/each}}
                     </div>
+                    {{/if}}
                 </section>
 
 
@@ -114,6 +117,7 @@
         </section>
         {{/if}}
 
+        {{#if allowed}}
         {{#if myNonFriendablePets}}
         <section id="PetFriends">
             <div class="row">
@@ -135,6 +139,7 @@
                 </div>
             </div>
         </section>
+        {{/if}}
         {{/if}}
 
         <div id="FriendsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="friendModal" aria-hidden="true">
