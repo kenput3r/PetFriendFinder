@@ -9,14 +9,15 @@
                 <!--adding action and method to the post and adding name to the text area-->
                 <form action="/api/posts" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                        <textarea class="form-control" id="PostBody" rows="3" name="body"></textarea>
                     </div>
+                    <input type="hidden" value="{{ownerId}}" id="OwnerId" />
                     <div class="form-group text-right">
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button id="SubmitPost" type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </form>
             </div>
-            <div class="row">
+            <div id="Posts" class="row">
                 {{#each posts}}
                 <div class="card mb-3 w-100">
                     <div class="card-body text-secondary">

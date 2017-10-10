@@ -76,8 +76,8 @@ $(document).ready(function () {
                 $('#AsyncFriends').append($col);
             }
             $('.add-friend').each(function () {
-                let friendPetId = $(this).find('.friendPetId').val();
-                let myPetId = $(this).find('.myPetId').val();
+                var friendPetId = $(this).find('.friendPetId').val();
+                var myPetId = $(this).find('.myPetId').val();
                 console.log('friendPetId', friendPetId);
                 console.log('myPetId', myPetId);
                 $(this).find('.MatchFriend').on('click', function (event) {
@@ -89,7 +89,7 @@ $(document).ready(function () {
                         .done(function (response) {
                             $('#AsyncFriends').html(response);
                         });
-                })
+                });
             });
 
         });
@@ -100,6 +100,40 @@ $(document).ready(function () {
         var userId = $('#AddFriendForm').attr('data-userId');
         $('#AsyncFriends').html('');
         getUsersPets(userId);
+    });
+
+    $('#SubmitPost').on('click', function(event) {
+        event.preventDefault();
+        var ownerId = $('#OwnerId').val();
+        var postBody = $('#PostBody').val();
+
+        $.post('/api/posts', {
+            OwnerId: ownerId,
+            body: postBody
+        }).done(function(response) {
+            var $card = $('<div>', {
+                class: 'card mb-3 w-100'
+            });
+            var $cardBody = $('<div>', {
+                class: 'card-body text-secondary'
+            });
+            var $cardText = $('<p>', {
+                class: 'card-text'
+            });
+            var $cardFooter = $('<div>', {
+                class: 'card-footer bg-transparent'
+            });
+
+            $card.append($cardBody);
+            $cardBody.append($cardText);
+            $card.append($cardFooter);
+
+            $cardText.html(postBody);
+            $cardFooter.html('<small>just now</small>');
+
+            $('#Posts').prepend($card);
+        });
+        
     });
 
     $("#post-btn").click(function () {

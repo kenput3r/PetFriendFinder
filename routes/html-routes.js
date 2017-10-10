@@ -319,6 +319,7 @@ module.exports = function (app) {
                         ownerPicture: data.picture,
                         ownerName: data.name,
                         posts: Posts,
+                        ownerId: req.user.id,
                         isUser: req.isAuthenticated()
                     });
                 });

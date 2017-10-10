@@ -24,7 +24,7 @@ module.exports = function(app){
             body: req.body.body,
             OwnerId: req.user.id
         }).then(function(data){
-            res.json(data);
+            res.send('success');
         })
     });
 
