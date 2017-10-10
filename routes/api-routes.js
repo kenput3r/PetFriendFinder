@@ -55,14 +55,14 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/api/posts', function(req, res) {
-        models.Posts.create({
-            body: req.body.text,
-            ownerId: req.user.id
-        }).then(data => {
-            console.log(data);
-        });
-    });
+    // app.post('/api/posts', function(req, res) {
+    //     models.Posts.create({
+    //         body: req.body.text,
+    //         ownerId: req.user.id
+    //     }).then(data => {
+    //         console.log(data);
+    //     });
+    // });
 
     //Upload Owner picture
     app.post("/api/upload", function (req, res) {
