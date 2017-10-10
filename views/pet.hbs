@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        {{#if mypets}}
+        {{#if myFriendablePets}}
         <section id="PetFriends">
             <div class="row">
                 <div class="col-md-6">
@@ -96,6 +96,29 @@
                                 <input type="hidden" name="friendPetId" value={{../friendPetId}}>
                                 <input type="hidden" name="myPetId" value={{id}}>
                                 <input type="submit" value="Make Friendship" id="submit"/>
+                            </div>
+                            </div>
+                        </form> 
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if myNonFriendablePets}}
+        <section id="PetFriends">
+            <div class="row">
+                <div class="col-md-6">
+                    {{#each mypets}}
+                        <form action="/api/friendships" method="post">  
+                            <div class="card float-right" style="width: 20rem;">
+                            <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{name}}</h4>
+                                <p class="card-text">{{bio}}</p>
+                                <input type="hidden" name="friendPetId" value={{../friendPetId}}>
+                                <input type="hidden" name="myPetId" value={{id}}>
+                                <input type="submit" value="Already Friends" id="submit"/>
                             </div>
                             </div>
                         </form> 

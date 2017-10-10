@@ -96,7 +96,7 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            incldue: [models.Owners]
+            include: [models.Owners]
         }).then(data => {
             models.Owners.findOne({
                 where: {
@@ -109,9 +109,11 @@ module.exports = function (app) {
                     }
                 }).then(friendChoices => {
                     
-                    let Pets = [];
+                    let FriendablePets = [];
+                    let NonFriendablePets = [];
 
                     for(pet in friendChoices) {
+                        console.log(friendChoices[pet].id);
                         ///showing from my pets only the ones who are NOT already friends with this pet
                         models.Friendships.findOne({
                             where: {
@@ -119,34 +121,39 @@ module.exports = function (app) {
                                 friendPetId: req.params.id
                             }
                         }).then(data => {
-                            if(!data){
-                                Pets.push(friendChoices[pet]);
+                            if(data){
+                                NonFriendablePets.push(friendChoices[pet]);
+                                console.log("//////"+friendChoices[pet].id);
                             }
                             else{
-                                
+                                FriendablePets.push(friendChoices[pet]);
+                                console.log(">>>>>>"+friendChoices[pet].id);
                             }
-                    
-                            res.render('pet', {
-                                id: req.params.id,
-                                name: data.name,
-                                picture: data.picture,
-                                age: data.age,
-                                type: data.type,
-                                breed: data.breed,
-                                bio: data.bio,
-                                location: ownerData.location,
-                                ownerName: ownerData.name,
-                                ownerAge: ownerData.age,
-                                ownerPicture: ownerData.picture,
-                                ownerId: ownerData.id,
-                                friendPetId: req.body.friendPetId,
-                                mypets: Pets,
-                                isUser: req.isAuthenticated()
-                            });
                         });
-                    }
+                    }        
+                    
+                    res.render('pet', {
+                        id: req.params.id,
+                        name: data.name,
+                        picture: data.picture,
+                        age: data.age,
+                        type: data.type,
+                        breed: data.breed,
+                        bio: data.bio,
+                        location: ownerData.location,
+                        ownerName: ownerData.name,
+                        ownerAge: ownerData.age,
+                        ownerPicture: ownerData.picture,
+                        ownerId: ownerData.id,
+                        friendPetId: req.body.friendPetId,
+                        myFriendablePets: FriendablePets,///my pets who can be friends
+                        myNonFriendablePets: NonFriendablePets,///my pets that are already friends
+                        isUser: req.isAuthenticated()
+                    });
+                });    
+                    
             });
-        });
+        });    
     });
 
     //Get all pets
