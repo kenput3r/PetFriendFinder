@@ -137,12 +137,6 @@ $(document).ready(function () {
         
     });
 
-    $("#post-btn").click(function () {
-        $.post("process.php", $("#reg-form").serialize(), function (data) {
-            alert(data);
-        });
-    });
-
     $('#cancel-edit').on('click', function () {
         location.reload();
     });
