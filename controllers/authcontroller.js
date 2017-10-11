@@ -1,6 +1,6 @@
 module.exports = {
     signup: function (req, res) {
-        res.render('signup');
+        res.render('/');
     },
     signin: function (req, res) {
         res.redirect('/profile');
