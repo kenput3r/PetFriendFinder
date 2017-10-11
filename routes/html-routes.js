@@ -255,7 +255,7 @@ module.exports = function (app) {
         })
     });
 
-    //Get owner's friends (no data)
+    //logged in view
     app.get('/home', function (req, res) {
         if (req.isAuthenticated()) {
             models.Owners.findOne({
@@ -305,22 +305,6 @@ module.exports = function (app) {
             res.render('pet', {
                 friendPetId: friendPetId,
                 mypets: Pets,
-                isUser: req.isAuthenticated()
-            });
-        });
-    });
-
-    //Get all pets
-    app.get('/find-pet-friend', function (req, res) {
-        models.Pets.findAll({}).then(data => {
-            let Pets = [];
-
-            for (pet in data) {
-                Pets.push(data[pet]);
-            }
-
-            res.render('find-pet-friend', {
-                pets: Pets,
                 isUser: req.isAuthenticated()
             });
         });
