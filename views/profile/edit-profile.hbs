@@ -37,9 +37,13 @@
                         <div class="form-group col-md-4">
                             <label for="gender" class="col-form-label">Gender</label>
                             <select required name="gender" class="form-control">
-                                <option name="gender" selected disabled hidden value="">Select One</option>
-                                <option name="gender" value="male">Male</option>
+                                {{#if isMale}}
+                                <option name="gender" value="male" selected>Male</option>
                                 <option name="gender" value="female">Female</option>
+                                {{else}}
+                                <option name="gender" value="male">Male</option>
+                                <option name="gender" value="female" selected>Female</option>
+                                {{/if}}
                             </select>
                         </div>
                         <div class="form-group col-md-2">

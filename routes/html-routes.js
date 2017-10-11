@@ -140,7 +140,11 @@ module.exports = function (app) {
 
     //Get all pets
     app.get('/pets', function (req, res) {
-        models.Pets.findAll({}).then(data => {
+        models.Pets.findAll({
+            where: {
+                OwnerId: {$ne: req.user.id}
+            }
+        }).then(data => {
             let Pets = [];
             let Types = [];
             let Breeds = [];
