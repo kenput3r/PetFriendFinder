@@ -1,8 +1,5 @@
 .jshintrc
 node_modules
-<<<<<<< HEAD
 .DS_Store
-=======
-.DS_Store
-fake/folder/
->>>>>>> 80327aa552a13180d17d7a76284e28f4aabfd07b
+assets/OwnerImages/
+assets/PetImages/
