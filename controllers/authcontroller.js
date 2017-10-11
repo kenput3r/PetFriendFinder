@@ -11,6 +11,8 @@ module.exports = {
         });
     },
     home: function (req, res) {
-        res.render('index');
+        res.render('index', {
+            bodyClass: 'home'
+        });
     }
 }
