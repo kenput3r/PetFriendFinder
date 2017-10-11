@@ -50,6 +50,11 @@ module.exports = function(sequelize, DataTypes) {
         Owners.hasMany(models.Pets, {
           onDelete: "cascade"
         });
-      };
+    };
+    // Owners.associate = function(models) {
+    //     Owners.hasMany(models.Posts, {
+    //       onDelete: "cascade"
+    //     });
+    // };
     return Owners;
 };

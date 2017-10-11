@@ -3,22 +3,6 @@ const path = require('path');
 
 module.exports = function (app) {
 
-    // //Get all owners
-    // app.get('/api/owners', function(req, res) {
-    //     models.Owners.findAll().then(function(data) {
-    //         res.json(data);
-    //     });
-    // });
-
-    // //Find a certain owner
-    // app.get('/api/owners/:id', function(req, res){
-    //     models.Owners.findOne({
-    //         where: {id: req.params.id},
-    //         include: [models.Pets]
-    //     }).then(function(ownerData){
-    //         res.json(ownerData);
-    //     });
-    // })
     //Get all owners
     app.get('/api/owners', function (req, res) {
         models.Owners.findAll().then(function (data) {
@@ -55,6 +39,15 @@ module.exports = function (app) {
         });
     });
 
+    // app.post('/api/posts', function(req, res) {
+    //     models.Posts.create({
+    //         body: req.body.text,
+    //         ownerId: req.user.id
+    //     }).then(data => {
+    //         console.log(data);
+    //     });
+    // });
+
     //Upload Owner picture
     app.post("/api/upload", function (req, res) {
 
@@ -86,6 +79,22 @@ module.exports = function (app) {
     });
 
     //Updating Owner's info
+    app.post('/api/edit-profile', function (req, res) {
+        models.Owners.update({
+            name: req.body.name,
+            email: req.body.email,
+            location: req.body.location,
+            gender: req.body.gender,
+            age: req.body.age,
+            bio: req.body.bio
+        }, {
+            where: {
+                id: req.user.id
+            }
+        }).then(function (dbOwners) {
+            res.redirect('/profile/edit-profile');
+        });
+    });
 
     //Deleting a certain owner
     app.delete('/api/owners/:id', function (req, res) {
@@ -96,6 +105,17 @@ module.exports = function (app) {
         }).then(function (dbOwners) {
             res.json(dbOwners);
         })
+    });
+
+    //Get logged in user pets
+    app.get('/api/users-pets/:id', function (req, res) {
+        models.Pets.findAll({
+            where: {
+                OwnerId: req.params.id * 1
+            }
+        }).then(data => {
+            res.json(data);
+        });
     });
 
 }

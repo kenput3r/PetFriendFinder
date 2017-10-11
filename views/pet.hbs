@@ -1,44 +1,91 @@
-<div class="row">
-    
-    <section class="col-md-6 col-sm-12">
-      <form action="/myPets" method="post"> 
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="rounded mx-auto img-fluid" src="{{picture}}" alt="{{name}}">
+                <h1>{{name}}, {{age}}</h1>
+                <h2>{{#if breed}}{{breed}} | {{/if}}{{type}}</h2>
+                <p>{{location}}</p>
+                <p>{{bio}}</p>
+                {{#if isUser}}
+                <form action="/pets/{{id}}" method="post" id="AddFriendForm" data-userId="{{userId}}" style="margin-bottom: 20px">
+                    <input type="hidden" value="{{id}}" name="friendPetId" id="FriendPetId"/>
+                    <input type="submit" value="Add Friend" id="SubmitFriend" class="btn btn-default" data-toggle="modal" data-target="#FriendsModal" />
+                </form>
+                {{/if}}
+            </div>
+            <div class="col-md-9">
+                <ul class="nav nav-tabs pet-margin-b-sm">
+                    <li class="nav-item">
+                        <a id="view-pets" class="nav-link section-change active" data-section="#Owners">Owners</a>
+                    </li>
 
-        <h2>{{name}}</h2>
+                    <li class="nav-item">
+                        <a id="view-friends" class="nav-link section-change" data-section="#Friends">Friends</a>
+                    </li>
+                </ul>
 
-        <img src="{{picture}}" />
+                <section id="Owners">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Owners</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="card w-100">
+                                <img class="card-img-top img-fluid" src="{{ownerPicture}}" alt="{{ownerName}}" />
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">{{ownerName}}, {{ownerAge}}</h4>
+                                    <a href="/owners/{{ownerId}}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <input type="hidden" name="friendPetId" value={{id}}>
+                <section id="Posts" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Posts</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">Coming Soon</div>
+                    </div>
+                </section>
 
-        {{#if canEdit}}
-            <p>I can edit this</p>
-        {{else}}
-            <p>I can't edit this</p>
-        {{/if}}
+                <section id="Friends" class="d-none">
+                    <div class="row">
+                        {{#each friendPets}}
+                        <div class="col-md-6">
+                            <div class="card float-left w-100">
+                                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{name}}</h4>
+                                    <p class="card-text">{{bio}}</p>
+                                    <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+            </div>
+        </div>
 
-         <input type="submit" value="Add Friend" id="submit"/>
-
-      </form> 
-    </section>
-</div>   
-
-
-<div class="row">
-<section class="col-md-6 col-sm-12">
-            {{#each mypets}}
-
-              <form action="/api/friendships" method="post">  
-                <div class="card float-right" style="width: 20rem;">
-                <img class="card-img-top" src="{{picture}}" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">{{name}}</h4>
-                    <p class="card-text">{{bio}}</p>
-                    <input type="hidden" name="friendPetId" value={{../friendPetId}}>
-                    <input type="hidden" name="myPetId" value={{id}}>
-                    <input type="submit" value="Make Friendship" id="submit"/>
+        <div id="FriendsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="friendModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid">
+                        <h3 class="modal-title">Which Pet Would You Like To Match With?</h3>
+                        <div id="AsyncFriends" class="row"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                </div>
-              </form> 
-            {{/each}}
-        </section>
-</div>    
-
+            </div>
+        </div>
+    </div>
+</main>

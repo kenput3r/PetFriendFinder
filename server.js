@@ -49,6 +49,9 @@ require('./routes/api-routes.js')(app, fileUpload);
 require('./routes/pet-api.js')(app, fileUpload);
 require('./routes/html-routes.js')(app);
 require('./routes/friendship-api.js')(app);
+require('./routes/posts-api.js')(app);
+require('./routes/profile-routes.js')(app);
+
 
 models.sequelize.sync({
     force: false

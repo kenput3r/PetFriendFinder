@@ -17,6 +17,10 @@
 * Update pet's info
 * Create form validation so that users HAVE to select a type
 
+* render frienship to pets/id
+* make sure that fiend pet pic stays there while choosing my pet 
+* Side note: when pets are displayed, should they not include my pets so that I am restricted to choose them as friens to my pet
+
 
 ***
 ### Note - /OwnerImages & /PetImages need to be manually added to /public as they are currently being ignored

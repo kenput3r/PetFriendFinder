@@ -3,33 +3,6 @@ const models = require('../models');
 
 module.exports = function(app) {
 
-    // //Get all pets
-    // app.get('/api/pets', function(req, res) {
-    //     let query = {};
-    //     if(req.query.owner_id) {
-    //         query.OwnerId = req.query.owner_id;
-    //     }
-
-    //     models.Pets.findAll({
-    //         where: query,
-    //         include: [models.Owners]
-    //     }).then(function(dbPets) {
-    //         res.json(dbPets);
-    //     });
-    // });
-
-    // //Get single pet
-    // app.get('/api/pets/:id', function(req, res) {
-    //     models.Pets.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         },
-    //         include: [models.Owners]
-    //     }).then(function(dbPets) {
-    //         res.json(dbPets);
-    //     });
-    // });
-
     //Post new pet with picture
     app.post('/api/pets', function(req, res) {
         let imgPath;
@@ -58,7 +31,7 @@ module.exports = function(app) {
             age: req.body.age,
             bio: req.body.bio
         }).then(function() {
-            res.redirect('/owners/' + ownerId);
+            res.redirect('/profile/view-pets');
         });
 
     });
@@ -105,11 +78,11 @@ module.exports = function(app) {
     });
 
     //Delete pet
-    app.delete('/api/pets/:id', function(req, res){
+    app.delete('/api/delete-pet/:id', function(req, res){
         models.Pets.destroy({
             where: {id: req.params.id}
         }).then(function(dbPets){
-            res.json(dbPets);
+            res.send('deleted');
         });
     });
 }

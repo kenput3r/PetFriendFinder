@@ -1,26 +1,74 @@
-<main class="container-fluid">
-    <div id="OwnerHeader" class="row">
-        
-        <div id="OwnerPicture" class="col-md-3">
-            <img src="{{picture}}" class="img-fluid" />
-        </div>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="rounded mx-auto img-fluid" src="{{picture}}" alt="{{name}}">
+                <h1>{{name}}, {{age}}</h1>
+                <p>{{email}}</p>
+                <p>{{location}}</p>
+                <p>{{bio}}</p>
+            </div>
+            <div class="col-md-9">
+                <ul class="nav nav-tabs pet-margin-b-sm">
+                    <li class="nav-item">
+                        <a id="view-pets" class="nav-link section-change active" data-section="#Pets">Pets</a>
+                    </li>
 
-        <div id="OwnerDetails" class="col-md-9">
-            <h2>{{name}}</h2>
-            <h3>{{age}}</h3>
-            <h3>{{location}}</h3>
-            <p>{{bio}}</p>
+                    <li class="nav-item">
+                        <a id="view-post" class="nav-link section-change" data-section="#Posts">Posts</a>
+                    </li>
+                </ul>
+
+                <section id="Pets">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Pets</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="card-deck">
+                            {{#each pets}}
+                            <div class="card">
+                                <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">{{name}}, {{age}}</h4>
+                                    <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </section>
+
+                <section id="Posts" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Posts</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{#each posts}}
+                        <div class="card mb-3 w-100">
+                            <div class="card-body text-secondary">
+                                <p class="card-text">{{body}}</p>
+                            </div>
+                            <div class="card-footer bg-transparent"><small>{{createdAt}}</small></div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+
+                <section id="Friends" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-left" style="display: inline-block">Friends</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">Coming Soon</div>
+                    </div>
+                </section>
+            </div>
         </div>
-        
     </div>
-        {{#each pets}}
-            <p>{{name}}</p>
-            <img src="{{picture}}" />
-        {{/each}}
-
-        {{#if canEdit}}
-
-        {{else}}
-            <p>I can't edit this</p>
-        {{/if}}
-</main>        
+</main>
