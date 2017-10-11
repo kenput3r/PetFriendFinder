@@ -18,7 +18,10 @@
                         <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
                         <div class="card-body">
                             <h4 class="card-title text-center">{{name}}</h4>
-                            <a href="/pets/{{id}}" class="btn btn-primary">View Profile</a>
+                            <a href="/pets/{{id}}" class="btn btn-primary mb-1">View Profile</a>
+                            <form>
+                                <a href="#" class="btn btn-danger delete-pet" data-id="{{id}}">Delete Pet</a>
+                            </form>
                         </div>
                     </div>
                     {{/each}}

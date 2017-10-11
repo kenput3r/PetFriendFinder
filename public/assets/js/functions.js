@@ -137,6 +137,24 @@ $(document).ready(function () {
         
     });
 
+    $('.delete-pet').on('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var id = $(this).attr('data-id');
+
+        var deletePet = confirm('Are you sure you want to delete your pet?');
+
+        if(deletePet) {
+            $.ajax({
+                method: 'DELETE',
+                url: '/api/delete-pet/' + id
+            }).done(function(response) {
+                location.reload();
+            });
+        }
+    });
+    
+
     $('#cancel-edit').on('click', function () {
         location.reload();
     });
