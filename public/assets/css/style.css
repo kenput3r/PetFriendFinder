@@ -48,9 +48,9 @@
     margin-bottom: 0;
 }
 
-/* .navbar {
+.navbar {
     margin-bottom: 20px;
-} */
+} 
 
 .nav-link:hover {
     cursor: pointer;
@@ -66,11 +66,83 @@
 
 .form {
     padding: 100px
-
-.navbar {
-    margin-bottom: 20px;
 }
 
 .nav-link:hover {
     cursor: pointer;
+}
+
+/**Home styles**/
+html, body.home {
+    height: 100%;
+    position: relative;
+}
+
+#HomeMain {
+    height: 100%;
+    position: relative;
+}
+
+#HomeTable {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+#ImageContainer {
+    background-image: url('../img/jax-the-bug.jpg');
+    background-size: contain;
+    background-attachment: fixed;
+    background-position: left;
+    background-repeat: no-repeat;
+    display: table-cell;
+    height: 100%;
+    width: 65%;
+}
+
+#SignUpForm {
+    display: table-cell;
+    height: 100%;
+    width: 35%;
+}
+
+@media (max-width: 1740px) {
+    #SignUpForm .form {
+        padding: 50px;
+    }
+}
+
+@media (max-width: 1450px) {
+    #SignUpForm .form {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 969px) {
+    #HomeTable {
+        display: block;
+    }
+
+    #ImageContainer {
+        background-size: cover;
+        background-position: center;
+        display: block;
+        height: 600px;
+        width: 100%;
+    }
+
+    #SignUpForm {
+        display: block;
+        width: 100%;
+    }
+
+    #SignUpForm .form {
+        padding: 100px;
+    }
+}
+
+@media (max-width: 700px) {
+    #SignUpForm .form {
+        padding: 30px;
+    }
 }
