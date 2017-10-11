@@ -16,14 +16,54 @@
     margin: 0 auto;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn.disabled:hover {
+    cursor: default;
+}
+
 .card {
     margin: 0 0 10px 0;
+}
+
+.card-body .btn {
+    width: 100%;
 }
 
 .card-header {
     padding: .5rem .75rem;
 }
 
-.navbar {
+#Filters {
     margin-bottom: 20px;
+}
+
+#Filters .row div {
+    margin-bottom: 15px;
+}
+
+#Filters .row div.text-right {
+    margin-bottom: 0;
+}
+
+/* .navbar {
+    margin-bottom: 20px;
+} */
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.pet-masthead {
+    padding: 0
+}
+
+.pet-margin-b-sm {
+    margin-bottom: 0
+}
+
+.form {
+    padding: 100px
 }
