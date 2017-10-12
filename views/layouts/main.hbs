@@ -38,11 +38,17 @@
       <a class="navbar-brand" href="/">
         <img src="/assets/img/logo.png" class="mr-1 d-inline-block align-top" width="30" height="30" alt="Logo"> Pet Friend Finder
       </a>
-      <form class="form-inline" id="signin" name="signin" method="post" action="/signin">
-        <input class="form-control mr-sm-2 mb-1 mt-1" name="email" type="text" placeholder="Email" />
-        <input class="form-control mr-sm-2" name="password" type="password" placeholder="Password" />
-        <button class="btn btn-outline-primary my-2 my-sm-0 mx-auto" type="submit">Login</button>
-      </form>
+      <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <form class="form-inline ml-auto" id="signin" name="signin" method="post" action="/signin">
+          <input class="form-control mr-sm-2 mb-1 mt-1" name="email" type="text" placeholder="Email" />
+          <input class="form-control mr-sm-2" name="password" type="password" placeholder="Password" />
+          <button class="btn btn-outline-primary my-2 my-sm-0 mx-auto" type="submit">Login</button>
+        </form>
+      </div>
       {{/if}}
     </div>
   </nav>
