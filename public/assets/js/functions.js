@@ -24,7 +24,7 @@ $(document).ready(function () {
             for (pet in data) {
                 var friendPetId = $('#FriendPetId').val();
 
-                if(friendPetId != data[pet].id) {
+                if (friendPetId != data[pet].id) {
                     var $col = $('<div>', {
                         class: 'col-md-6'
                     });
@@ -106,7 +106,7 @@ $(document).ready(function () {
         getUsersPets(userId);
     });
 
-    $('#SubmitPost').on('click', function(event) {
+    $('#SubmitPost').on('click', function (event) {
         event.preventDefault();
         var ownerId = $('#OwnerId').val();
         var postBody = $('#PostBody').val();
@@ -114,7 +114,7 @@ $(document).ready(function () {
         $.post('/api/posts', {
             OwnerId: ownerId,
             body: postBody
-        }).done(function(response) {
+        }).done(function (response) {
             var $card = $('<div>', {
                 class: 'card mb-3 w-100'
             });
@@ -138,26 +138,26 @@ $(document).ready(function () {
             $('#Posts').prepend($card);
             $('#PostBody').val('');
         });
-        
+
     });
 
-    $('.delete-pet').on('click', function(event) {
+    $('.delete-pet').on('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         var id = $(this).attr('data-id');
 
         var deletePet = confirm('Are you sure you want to delete your pet?');
 
-        if(deletePet) {
+        if (deletePet) {
             $.ajax({
                 method: 'DELETE',
                 url: '/api/delete-pet/' + id
-            }).done(function(response) {
+            }).done(function (response) {
                 location.reload();
             });
         }
     });
-    
+
 
     $('#cancel-edit').on('click', function () {
         location.reload();
@@ -168,6 +168,7 @@ $(document).ready(function () {
         case '/profile':
         case '/profile/':
             $('#view-post').addClass('active');
+            $('#my-profile').addClass('active outline-active');
             break;
         case '/profile/view-pets':
         case '/profile/view-pets/':
@@ -185,13 +186,13 @@ $(document).ready(function () {
         case '/home/':
             $('#feed').addClass('active');
             break;
-        case '/find-pet-friend':
-        case '/find-pet-friend/':
-            $('#find-pet-friend').addClass('active');
+        case '/pets':
+        case '/pets/':
+            $('#find-pets').addClass('active outline-active');
             break;
-        case '/message':
-        case '/message/':
-            $('#message').addClass('active');
+        case '/owners':
+        case '/owners/':
+            $('#find-owners').addClass('active outline-active');
             break;
     }
 
