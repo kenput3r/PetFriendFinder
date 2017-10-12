@@ -128,3 +128,11 @@ body.home .navbar {
         padding: 30px;
     }
 }
+
+@media (max-width: 450px) {
+    #ImageContainer {
+        background-size: contain;
+        background-position: top;
+        height: 300px;
+    }
+}
