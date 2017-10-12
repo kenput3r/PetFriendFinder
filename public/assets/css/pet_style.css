@@ -10,6 +10,10 @@ button:hover {
   border-radius: 1.25rem!important;
 }
 
+.nav-item:hover {
+  color: white !important;
+}
+
 .navBar-link {
   margin-left: .5rem;
   padding-right: .5rem !important;
@@ -18,6 +22,10 @@ button:hover {
 
 .navBar-rm {
   margin: 0 !important;
+}
+
+.outline-active {
+  color: white !important;
 }
 
 .pet-masthead {
