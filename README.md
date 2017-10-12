@@ -59,10 +59,10 @@ node server.js
 
 ## Authors
 
-* **devolve.wtf** - *Initial work* - [devolve-wtf](https://github.com/devolve-wtf)
+* **kenput3r** - *Initial work* - [devolve-wtf](https://github.com/devolve-wtf)
 * **Marwa-Mahmoud** - *Initial work* - [Marwa-Mahmoud](https://github.com/Marwa-Mahmoud)
-* **Moogieee** - *Initial work* - [devolve-wtf](https://github.com/Moogieee)
-* **Sandro** - *Initial work* - [devolve-wtf](https://github.com/saloiofun)
+* **Carie** - *Initial work* - [Moogieee](https://github.com/Moogieee)
+* **Sandro** - *Initial work* - [saloiofun](https://github.com/saloiofun)
 
 ## Acknowledgments
 No pets were harmed during the development of this site
