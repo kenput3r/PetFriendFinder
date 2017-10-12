@@ -13,32 +13,39 @@
             </div>
             <div class="row justify-content-center">
                 <div class="card-deck">
-                    {{#each pets}}
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
-                        <div class="card-body">
-                            <h4 class="card-title text-center">{{name}}</h4>
-                            <a href="/pets/{{id}}" class="btn btn-primary mb-1">View Profile</a>
-                            <form>
-                                <a href="#" class="btn btn-danger delete-pet" data-id="{{id}}">Delete Pet</a>
-                            </form>
+                    <div class="row">
+                        {{#each pets}}
+                        <div class="col-4">
+                            <div class="card">
+                                <a href="/pets/{{id}}">
+                                    <img class="card-img-top img-fluid" src="{{picture}}" alt="{{name}}" />
+                                </a>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">{{name}}</h4>
+                                    <a href="/pets/{{id}}" class="btn btn-primary mb-1">View Profile</a>
+                                    <button type="button" class="btn btn-info mb-1 edit-pet" data-toggle="modal" data-target="#edit-pet" data-id="{{id}}">Edit Profile</button>
+                                    <form>
+                                        <a href="#" class="btn btn-danger delete-pet" data-id="{{id}}">Delete Pet</a>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                        {{/each}}
                     </div>
-                    {{/each}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- Add Pet Modal -->
 <div class="modal fade" id="add-pet" tabindex="-1" role="dialog" aria-labelledby="add-petLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="add-petLabel">Add a new Pet</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form ref='uploadForm' id='AddPet' action='/api/pets' method='post' encType="multipart/form-data">
@@ -64,10 +71,10 @@
                         <div class="form-group col-6">
                             <label for="gender" class="col-form-label">Gender</label>
                             <select name="gender" class="form-control">
-                    <option name="gender" selected>Select One</option>
-                    <option name="gender" value="male" >Male</option>
-                    <option name="gender" value="female">Female</option>
-                    </select>
+                                <option name="gender" selected>Select One</option>
+                                <option name="gender" value="male">Male</option>
+                                <option name="gender" value="female">Female</option>
+                            </select>
                         </div>
                         <div class="form-group col-6">
                             <label for="age" class="col-form-label">Age</label>
@@ -84,6 +91,83 @@
                         <input type='submit' class="btn btn-primary" value='Add' id="upload" />
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Pet Modal -->
+<div class="modal fade" id="edit-pet" tabindex="-1" role="dialog" aria-labelledby="edit-petLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-petLabel">Edit Pet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ref='uploadForm' id='UpdatePetImg-form' action='/api/newpetimg/upload' method='post' encType="multipart/form-data">
+                    <div class="form-group">
+                        <label for="petPicture" class="col-form-label">Update Picture</label>
+                        <input class="form-control mb-2" type="file" name="petPicture" />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" id="upload">Upload!</button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <form id="edit-pet-form" name="edit-pet" method="post" action="/api/update-pet">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="name" class="col-form-label">Name</label>
+                            <input id="pet-name" class="form-control" type="text" name="name" />
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="age" class="col-form-label">Age</label>
+                            <input id="pet-age" class="form-control" name="age" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="type" class="col-form-label">Pet Type</label>
+                            <input id="pet-type" class="form-control" type="text" name="type" placeholder="Dog" />
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="breed" class="col-form-label">Breed</label>
+                            <input id="pet-breed" class="form-control" type="text" name="breed" placeholder="Pug" />
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="bio">Bio</label>
+                        <textarea id="pet-bio" class="form-control" name="bio" rows="3"></textarea>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type='submit' class="btn btn-primary" value='Save' id="update" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Modal -->
+<div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="alertLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertLabel">Ops!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                No image was uploaded!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

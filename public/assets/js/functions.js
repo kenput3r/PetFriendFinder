@@ -158,6 +158,24 @@ $(document).ready(function () {
         }
     });
 
+    function getPetInfo(petId) {
+        $.get('/api/pet/' + petId).done(function (data) {
+            $(".pet-data").remove();
+            $('#edit-pet-form').append('<input type="hidden" class="pet-data" name="id" value="' + data.id + '" />');
+            $('#UpdatePetImg-form').append('<input type="hidden" class="pet-data" name="id" value="' + data.id + '" />');
+            $('#UpdatePetImg-form').append('<input type="hidden" class="pet-data" name="name" value="' + data.name + '" />');
+            $('#pet-name').val(data.name);
+            $('#pet-type').val(data.type);
+            $('#pet-breed').val(data.breed);
+            $('#pet-age').val(data.age);
+            $('#pet-bio').val(data.bio);
+        });
+    }
+
+    $('.edit-pet').on('click', function () {
+        var petId = $(this).attr('data-id');
+        getPetInfo(petId);
+    });
 
     $('#cancel-edit').on('click', function () {
         location.reload();
@@ -173,6 +191,7 @@ $(document).ready(function () {
         case '/profile/view-pets':
         case '/profile/view-pets/':
             $('#view-pets').addClass('active');
+            $('#my-profile').addClass('active outline-active');
             break;
         case '/profile/view-friends':
         case '/profile/view-friends/':
@@ -181,6 +200,7 @@ $(document).ready(function () {
         case '/profile/edit-profile':
         case '/profile/edit-profile/':
             $('#edit-profile').addClass('active');
+            $('#my-profile').addClass('active outline-active');
             break;
         case '/home':
         case '/home/':
