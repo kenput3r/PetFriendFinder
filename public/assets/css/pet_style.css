@@ -16,6 +16,10 @@ button:hover {
   padding-left: .5rem !important;
 }
 
+.navBar-rm {
+  margin: 0 !important;
+}
+
 .pet-masthead {
   position: relative;
   padding: 2rem 20px;

@@ -16,30 +16,32 @@
 </head>
 
 <body class="{{bodyClass}}">
-  <nav class="navbar navbar-light bg-light justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       {{#if isUser}}
-      <a href="/home" class="navbar-brand">Pet Friend Finder</a>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-info navBar-link" href="/pets" role="button">Find Pets</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-info navBar-link" href="/owners" role="button">Find Pet Owners</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-info navBar-link" href="/profile" role="button">My Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-info navBar-link" href="/logout" role="button">Logout</a>
-        </li>
-      </ul>
+      <a class="navbar-brand" href="/home">
+        <img src="/assets/img/logo.png" class="mr-1 align-top" width="30" height="30" alt="Logo"> Pet Friend Finder
+      </a>
+      <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ml-auto justify-content-center">
+          <a class="nav-item nav-link btn btn-outline-info navBar-link navBar-rm" href="/pets" role="button">Find Pets</a>
+          <a class="nav-item nav-link btn btn-outline-info navBar-link" href="/owners" role="button">Find Pet Owners</a>
+          <a class="nav-item nav-link btn btn-outline-info navBar-link" href="/profile" role="button">My Profile</a>
+          <a class="nav-item nav-link btn btn-outline-info navBar-link" href="/logout" role="button">Logout</a>
+        </div>
+      </div>
       {{else}}
-      <a href="/" class="navbar-brand">Pet Friend Finder</a>
+      <a class="navbar-brand" href="/">
+        <img src="/assets/img/logo.png" class="mr-1 d-inline-block align-top" width="30" height="30" alt="Logo"> Pet Friend Finder
+      </a>
       <form class="form-inline" id="signin" name="signin" method="post" action="/signin">
-        <input class="form-control mr-sm-2" name="email" type="text" placeholder="Email" />
+        <input class="form-control mr-sm-2 mb-1 mt-1" name="email" type="text" placeholder="Email" />
         <input class="form-control mr-sm-2" name="password" type="password" placeholder="Password" />
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0 mx-auto" type="submit">Login</button>
       </form>
       {{/if}}
     </div>
