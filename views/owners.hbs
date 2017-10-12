@@ -4,13 +4,15 @@
         {{#each owners}}
         <div class="col-sm-12 col-md-4 col-lg-3">
             <div class="card w-100">
-            <img class="card-img-top" src="{{picture}}" alt="Card image cap">
-            <div class="card-body">
-                <h4 class="card-title">{{name}}</h4>
-                <p class="card-text">{{age}}</p>
-                <p class="card-text">{{location}}</p>
-                <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
-            </div>
+                <a href="owners/{{id}}">
+                    <img class="card-img-top" src="{{picture}}" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text">{{age}}</p>
+                    <p class="card-text">{{location}}</p>
+                    <a href="owners/{{id}}" class="btn btn-primary">View Profile</a>
+                </div>
             </div>
         </div>
         {{/each}}
