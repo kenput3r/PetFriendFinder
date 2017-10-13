@@ -125,6 +125,7 @@ body.home .navbar {
     #SignUpForm {
         display: block;
         width: 100%;
+        padding-top: 0;
     }
 
     #SignUpForm .form {
