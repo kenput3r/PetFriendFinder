@@ -93,6 +93,7 @@ body.home .navbar {
 #SignUpForm {
     display: table-cell;
     height: 100%;
+    padding-top: 62px;
     width: 35%;
 }
 
